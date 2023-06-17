@@ -1,3 +1,7 @@
 {
-   "*.{js,jsx,ts,tsx}": ["eslint --fix", "jest --passWithNoTests"]
+   "*.{js,jsx,ts,tsx}": [
+      "eslint --fix",
+      "jest --passWithNoTests",
+      "prettier --write"
+   ]
 }
