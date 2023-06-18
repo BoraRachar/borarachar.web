@@ -19,7 +19,7 @@ export default function Header() {
                         </div>
                         <div className="flex w-2/4 items-center justify-end text-lg">
                             <Link href="#" className="mr-8" id="link-login">Login</Link>
-                            <Link href=".#">
+                            <Link href="#">
                                 <button
                                     className="bg-dark-button w-48 h-14 rounded-md text-white font-semibold"
                                     id="button-criar-conta"
