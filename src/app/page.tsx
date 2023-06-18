@@ -1,7 +1,7 @@
 export const metadata = {
-  title: 'Bora Rachar | Home',
-  description: '...',
-}
+   title: "Bora Rachar | Home",
+   description: "...",
+};
 
 export default function Home() {
    return (
