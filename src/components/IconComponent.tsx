@@ -2,11 +2,17 @@ import Image from 'next/image';
 
 interface IconComponentProps {
   url: string;
+  widthIcon: number;
+  heightIcon: number;
 }
 
-const IconComponent: React.FC<IconComponentProps> = ({ url }) => {
+const IconComponent: React.FC<IconComponentProps> = ({ 
+  url,
+  widthIcon,
+  heightIcon,
+}) => {
   return (
-    <Image src={url} alt='icone' width={100} height={100}/>
+    <Image src={url} alt='icone' width={widthIcon} height={heightIcon}/>
   );
 }
 
