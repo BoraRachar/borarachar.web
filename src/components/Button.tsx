@@ -25,7 +25,7 @@ export default function Buttons({
     if (type === 'primary') {
       return (
         <button
-          id="primary-button"
+          id={`button-${title}`}
           className={`
             w-full py-4 bg-[#724fd8] rounded-[5px]
             text-base font-semibold text-white 
@@ -41,7 +41,7 @@ export default function Buttons({
     else if (type === 'secondary') {
       return (
         <button
-          id="secondary-button"
+          id={`button-${title}`}
           className={`
             w-full py-4 border-[1px] border-white rounded-[5px]
             text-base font-semibold text-white 
