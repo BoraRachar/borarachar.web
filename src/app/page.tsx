@@ -1,6 +1,4 @@
 import Header from "@/components/Header";
-import Button from "@/components/Button";
-import IconsComponent from "@/components/IconsComponent";
 
 export const metadata = {
    title: "Bora Rachar | Home",
@@ -8,6 +6,7 @@ export const metadata = {
 };
 
 export default function Home() {
+   
    return (
       <main>
          <Header />
