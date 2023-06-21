@@ -20,10 +20,16 @@ export default function DropDown({ title, message }: DropDownProps) {
   const dropdownHeight = activeButton ? 'auto' : '89px';
 
   return (
-      <details className={`flex flex-col w-full min-h-${dropdownHeight} border-b mb-4 border-[#A7A7A7]`}>
-        <summary className='list-none'>
+      <details 
+          id={`dropdown-details-${title}`} 
+          className={`flex flex-col w-full min-h-${dropdownHeight} border-b mb-2 border-[#A7A7A7]`}
+        >
+        <summary 
+          className='list-none'
+          id={`dropdown-summary-${title}`} 
+        >
           <div 
-            className='flex justify-between text-xl font-color-dark mb-4'
+            className='flex justify-between font-medium text-xl font-color-dark mb-4'
             id={`dropdown-${title}`}
           >
             {title}
