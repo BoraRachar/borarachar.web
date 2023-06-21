@@ -23,10 +23,14 @@ export default function HeroSection() {
                customClassesNames="max-w-[300px]"
             />
          </section>
-         <section id="hero-section-right">
+         <figure id="hero-section-right">
             {/* Placeholder */}
+            {/* This will be replaced by other content, problably and image or video source. */}
             <div className="w-full bg-gray-200 rounded-2xl h-[420px]"></div>
-         </section>
+            <figcaption className="invisible">
+               This will be replaced by one legend of the content above.
+            </figcaption>
+         </figure>
       </main>
    );
 }
