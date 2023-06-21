@@ -1,4 +1,5 @@
 import Header from "@/components/Header";
+import HeroSection from "@/sections/HeroSection";
 
 export const metadata = {
    title: "Bora Rachar | Home",
@@ -6,11 +7,10 @@ export const metadata = {
 };
 
 export default function Home() {
-   
    return (
       <main>
          <Header />
-         <h1>Bora rachar</h1>
+         <HeroSection />
       </main>
    );
 }
