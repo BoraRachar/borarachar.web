@@ -57,7 +57,7 @@ export default function Home() {
    return (
       <main>
          <Header />
-         <HeroSection />
+       <HeroSection />
           <section className="grid w-11/12 grid-cols-3 gap-10 py-32 mx-auto">
             {primaryCardsList.map((card) => (
                <Card key={card.title} type="primary" id={`card-${card.title}`}>
