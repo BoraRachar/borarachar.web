@@ -4,7 +4,7 @@ module.exports = {
       "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
       "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
       "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
-      "./src/sections/**/*.{js,ts,jsx,tsx,mdx}",
+     "./src/sections/**/*.{js,ts,jsx,tsx,mdx}",
    ],
    theme: {
       extend: {
@@ -15,6 +15,9 @@ module.exports = {
             neutral: "#F2F2F2",
             "dark-button": "#222225",
             "font-color-dark": "#000000",
+         },
+        boxShadow: {
+            "card-custom": "17px 18px 0px 3px rgba(165,134,255,1)",
          },
       },
    },
