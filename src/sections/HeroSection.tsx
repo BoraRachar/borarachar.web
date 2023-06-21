@@ -25,7 +25,7 @@ export default function HeroSection() {
          </section>
          <figure id="hero-section-right">
             {/* Placeholder */}
-            {/* This will be replaced by other content, problably and image or video source. */}
+            {/* This will be replaced by other content, probably one image or video source. */}
             <div className="w-full bg-gray-200 rounded-2xl h-[420px]"></div>
             <figcaption className="invisible">
                This will be replaced by one legend of the content above.
