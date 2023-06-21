@@ -10,7 +10,6 @@ export default function Home() {
    return (
       <main>
          <Header />
-         <h1>Bora rachar</h1>
       </main>
    );
 }
