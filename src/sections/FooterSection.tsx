@@ -1,5 +1,5 @@
 import Category from "@/components/Footer/Category";
-import LogoComponent from "@/components/Footer/LogoComponent";
+import Socials from "@/components/Footer/Socials";
 import Newsletter from "@/components/Footer/Newsletter";
 
 const CompanyCategoryData = {
@@ -56,9 +56,12 @@ const CustomerCategoryData = {
 
 export default function FooterSection() {
   return (
-    <footer className="h-[491px] flex justify-center items-center">
-      <section className="flex w-[85%] justify-between">
-        <LogoComponent />
+    <footer
+      id="footer-section"
+      className="h-[491px] flex justify-center items-center"
+    >
+      <section id="footer-container" className="flex w-[85%] justify-between">
+        <Socials />
         <Category
           name={CompanyCategoryData.name}
           links={CompanyCategoryData.links}

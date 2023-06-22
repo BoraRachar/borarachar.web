@@ -6,27 +6,27 @@ import twitter from "@/assets/Twitter.svg";
 import instagram from "@/assets/Instagram.svg";
 import linkedin from "@/assets/Linkedin.svg";
 
-export default function LogoComponent() {
+export default function Socials() {
   return (
-    <section className="w-[270px]">
-      <Link href="#">
+    <section id="socials-wrapper" className="w-[270px]">
+      <Link id="socials-logo" href="#">
         <Image src={logo} alt="Logo do Bora Rachar" />
       </Link>
-      <p className="text-[#637381] text-[15px] mt-[22px]">
+      <p id="socials-text" className="text-[#637381] text-[15px] mt-[22px]">
         Lorem ipsum dolor amet consectetur adipiscing elit do eiusmod tempor
         incididunt ut labore et dolore.
       </p>
-      <nav className="flex gap-[27px] mt-[69px]">
-        <Link href="#">
+      <nav id="socials-nav" className="flex gap-[27px] mt-[69px]">
+        <Link id="socials-icon-facebook" href="#">
           <Image src={facebook} alt="Logo do facebook" />
         </Link>
-        <Link href="#">
+        <Link id="socials-icon-twitter" href="#">
           <Image src={twitter} alt="Logo do twitter" />
         </Link>
-        <Link href="#">
+        <Link id="socials-icon-instagram" href="#">
           <Image src={instagram} alt="Logo do instagram" />
         </Link>
-        <Link href="#">
+        <Link id="socials-icon-linkedin" href="#">
           <Image src={linkedin} alt="Logo do linkedin" />
         </Link>
       </nav>
