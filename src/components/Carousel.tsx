@@ -101,8 +101,8 @@ export default function Carousel({ children }: CarouselProps): JSX.Element {
    }, []);
 
    return (
-      <div className="relative w-11/12 mx-auto">
-         <section className="w-10/12 mx-auto py-28">
+      <div className="relative w-full mx-auto py-11">
+         <section className="w-10/12 mx-auto">
             <div
                className="flex items-start gap-10 py-20 mx-auto overflow-x-hidden"
                ref={carouselItemsRef}
