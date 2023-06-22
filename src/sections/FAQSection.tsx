@@ -39,7 +39,7 @@ export default function FAQSection () {
         />
         {faqList.map(({ title, message }) => (
           <DropDown key={title} title={title} message={message}/>
-        ))}.
+        ))}
       </section>
     </main>
   );
