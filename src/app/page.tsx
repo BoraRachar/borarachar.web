@@ -1,15 +1,20 @@
 import Header from "@/components/Header";
+import FeaturesSection from "@/sections/FeaturesSection";
+import HeroSection from "@/sections/HeroSection";
+import ServicesSection from "@/sections/ServicesSection";
 
 export const metadata = {
-  title: "Bora Rachar | Home",
-  description: "...",
+   title: "Bora Rachar | Página inicial",
+   description: "...",
 };
 
 export default function Home() {
-  return (
-    <main>
-      <Header />
-      <h1>Bora rachar</h1>
-    </main>
-  );
+   return (
+      <main>
+         <Header />
+         <HeroSection />
+          <ServicesSection />
+          <FeaturesSection />
+      </main>
+   );
 }
