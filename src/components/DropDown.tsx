@@ -5,11 +5,12 @@ import plusIcon from '@/assets/plusIcon.svg';
 import minusIcon from '@/assets/minusIcon.svg';
 
 interface DropDownProps {
+  id: number;
   title: String;
   message: string;
 }
 
-export default function DropDown({ title, message }: DropDownProps) {
+export default function DropDown({ id, title, message }: DropDownProps) {
   const [activeButton, setActiveButton] = useState(false);
 
   const handleClickButton = (event: SyntheticEvent) => {
@@ -21,7 +22,7 @@ export default function DropDown({ title, message }: DropDownProps) {
 
   return (
       <details 
-          id={`dropdown-details-${title}`} 
+          id={`dropdown-details-${id}`} 
           className={`flex flex-col w-full min-h-${dropdownHeight} border-b mb-2 border-[#A7A7A7]`}
         >
         <summary 
