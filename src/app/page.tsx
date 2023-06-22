@@ -2,6 +2,7 @@ import Buttons from "@/components/Button";
 import Card from "@/components/Card";
 import Header from "@/components/Header";
 import HeroSection from "@/sections/HeroSection";
+import FAQSection from "@/sections/FAQSection";
 
 export const metadata = {
    title: "Bora Rachar | Home",
@@ -86,6 +87,7 @@ export default function Home() {
                </Card>
             ))}
          </section>
+         <FAQSection />
       </main>
    );
 }
