@@ -1,5 +1,3 @@
-import Buttons from "@/components/Button";
-import Card from "@/components/Card";
 import Header from "@/components/Header";
 import HeroSection from "@/sections/HeroSection";
 
@@ -7,24 +5,6 @@ export const metadata = {
    title: "Bora Rachar | Home",
    description: "...",
 };
-
-const primaryCardsList = [
-   {
-      title: "Cursos",
-      description: "Netflix, Spotify, HBO Max, Disney+ e muito mais!",
-      url: "#",
-   },
-   {
-      title: "Cursos",
-      description: "Netflix, Spotify, HBO Max, Disney+ e muito mais!",
-      url: "#",
-   },
-   {
-      title: "Cursos",
-      description: "Netflix, Spotify, HBO Max, Disney+ e muito mais!",
-      url: "#",
-   },
-];
 
 const secondaryCardsList = [
    {
@@ -58,7 +38,7 @@ export default function Home() {
       <main>
          <Header />
          <HeroSection />
-          <section className="grid w-11/12 grid-cols-3 gap-10 py-32 mx-auto">
+         {/* <section className="grid w-11/12 grid-cols-3 gap-10 py-32 mx-auto">
             {primaryCardsList.map((card) => (
                <Card key={card.title} type="primary" id={`card-${card.title}`}>
                   <div className="flex flex-col gap-8">
@@ -85,7 +65,7 @@ export default function Home() {
                   </p>
                </Card>
             ))}
-         </section>
+         </section> */}
       </main>
    );
 }

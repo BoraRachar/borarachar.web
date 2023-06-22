@@ -1,0 +1,97 @@
+"use client";
+
+import { useEffect, useRef, useState } from "react";
+
+/**
+ * Props do Carousel.
+ */
+interface CarouselProps {
+    children: React.ReactNode;
+  }
+  
+  /**
+   * Componente Carousel.
+   * @param {CarouselProps} props - Props do Carousel.
+   * @returns {JSX.Element} Componente Carousel.
+   */
+  export default function Carousel({ children }: CarouselProps): JSX.Element {
+    // Estado do índice do item do meio atual.
+    const [currentMiddleItemIndex, setCurrentMiddleItemIndex] = useState<number>(1);
+    // Estado que indica se o carousel está em movimento.
+    const [isMoving, setIsMoving] = useState<boolean>(false);
+    // Referência para o elemento do carousel.
+    const carouselItemsRef = useRef<HTMLDivElement>(null);
+    // Número de filhos do carousel.
+    const numberOfChildrens = carouselItemsRef.current?.children.length ?? 0;
+  
+    /**
+     * Obtém a posição X do slide atual.
+     * @returns {number} Posição X do slide atual.
+     */
+    const getCurrentSlidePosX = (): number => {
+      return carouselItemsRef.current?.scrollLeft ?? 0;
+    };
+  
+    /**
+     * Controla as classes CSS dos itens do carousel.
+     * @param {string} action - Ação a ser executada: "decrease" (diminuir) ou "increase" (aumentar).
+     */
+    const classNamesController = (action: "decrease" | "increase"): void => {
+      const currentIndex = currentMiddleItemIndex + (action === "decrease" ? -1 : 1);
+      carouselItemsRef.current?.children[currentMiddleItemIndex].classList.remove("-translate-y-10");
+      carouselItemsRef.current?.children[currentIndex].classList.add("-translate-y-10");
+      setCurrentMiddleItemIndex(currentIndex);
+    };
+  
+    /**
+     * Manipula o movimento do carousel.
+     * @param {string} move - Direção do movimento: "prev" (anterior) ou "next" (próximo).
+     */
+    const handleMoveCarousel = (move: "prev" | "next"): void => {
+      if (!isMoving) {
+        const widthOfCard = carouselItemsRef.current?.children[currentMiddleItemIndex]?.clientWidth ?? 0;
+        setIsMoving(true);
+  
+        if (move === "prev" && currentMiddleItemIndex > 1) {
+          classNamesController("decrease");
+          carouselItemsRef.current?.scrollTo({ left: getCurrentSlidePosX() - widthOfCard - 40, behavior: "smooth" });
+        } else if (move === "next" && currentMiddleItemIndex < numberOfChildrens - 2) {
+          classNamesController("increase");
+          carouselItemsRef.current?.scrollTo({ left: getCurrentSlidePosX() + widthOfCard + 40, behavior: "smooth" });
+        }
+  
+        setTimeout(() => {
+          setIsMoving(false);
+        }, 500);
+      }
+    };
+  
+    useEffect(() => {
+      // Adiciona a classe CSS ao item do meio atual quando o componente é montado.
+      if (carouselItemsRef.current && carouselItemsRef.current.children.length > 0) {
+        carouselItemsRef.current.children[currentMiddleItemIndex].classList.add("-translate-y-10");
+      }
+    }, []);
+  
+    return (
+      <div className="relative w-11/12 mx-auto">
+        <section className="w-10/12 mx-auto py-28">
+          <div className="flex items-start gap-10 py-20 mx-auto overflow-x-hidden" ref={carouselItemsRef}>
+            {children}
+          </div>
+        </section>
+        <div className="absolute flex items-center justify-between w-full -translate-y-1/2 top-1/2">
+          <button
+            className="h-[70px] w-[70px] bg-red-600 rounded-full"
+            onClick={() => handleMoveCarousel("prev")}
+            disabled={currentMiddleItemIndex <= 1}
+          ></button>
+          <button
+            className="h-[70px] w-[70px] bg-red-600 rounded-full"
+            onClick={() => handleMoveCarousel("next")}
+            disabled={currentMiddleItemIndex === numberOfChildrens - 2}
+          ></button>
+        </div>
+      </div>
+    );
+  }
