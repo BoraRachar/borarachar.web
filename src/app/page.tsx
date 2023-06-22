@@ -3,6 +3,7 @@ import FeaturesSection from "@/sections/FeaturesSection";
 import HeroSection from "@/sections/HeroSection";
 import ServicesSection from "@/sections/ServicesSection";
 import FAQSection from "@/sections/FAQSection";
+import Footer from "@/sections/FooterSection"
 
 export const metadata = {
    title: "Bora Rachar | Página inicial",
@@ -17,6 +18,7 @@ export default function Home() {
           <ServicesSection />
           <FeaturesSection />
           <FAQSection />
+          <Footer />
       </main>
    );
 }
