@@ -74,36 +74,7 @@ export default function Home() {
    return (
       <main>
          <Header />
-         <HeroSection />
-         {/* <section className="grid w-11/12 grid-cols-3 gap-10 py-32 mx-auto">
-            {primaryCardsList.map((card) => (
-               <Card key={card.title} type="primary" id={`card-${card.title}`}>
-                  <div className="flex flex-col gap-8">
-                     <h3 className="text-3xl font-medium text-white">
-                        {card.title}
-                     </h3>
-                     <p className="mb-32 text-xl font-normal text-white">
-                        {card.description}
-                     </p>
-                     <Buttons type="secondary" title="Ver grupos" />
-                  </div>
-               </Card>
-            ))}
-         </section>
-         <section className="grid w-11/12 grid-cols-4 gap-10 mx-auto">
-            {secondaryCardsList.map((card) => (
-               <Card key={card.title} type="secondary" id={`card-${card.title}`}>
-                  {card.icon}
-                  <h3 className="text-xl font-medium text-[#5A5A5A]">
-                     {card.title}
-                  </h3>
-                  <p className="mb-32 text-base font-light text-[#5A5A5A]">
-                     {card.description}
-                  </p>
-               </Card>
-            ))}
-         </section> */}
-
+       <HeroSection />
          <Carousel>
             {primaryCardsList.map((card, index) => (
                <Card
