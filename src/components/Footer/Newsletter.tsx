@@ -1,10 +1,10 @@
-import Email from "@/assets/Email.svg";
+// import email from "@/assets/email-icon.svg";
 import Image from "next/image";
 
 export default function Newsletter() {
   return (
     <section>
-      <h1 className="font-semibold text-lg" id={`newsletter-title`}>
+      <h1 className="text-lg font-semibold" id={`newsletter-title`}>
         Subscribe to Newsletter
       </h1>
       <p
@@ -13,7 +13,7 @@ export default function Newsletter() {
       >
         Enter your email address for recieving valuable newsletters.
       </p>
-      <fieldset className="mt-6 flex" id={`newsletter-input-wrapper`}>
+      <fieldset className="flex mt-6" id={`newsletter-input-wrapper`}>
         <input
           className="placeholder-[#637381] w-[222px] text-sm flex pl-5 outline-none border-[#EEEEEE] border-[1px] rounded-l-[5px]"
           id={`newsletter-input`}
@@ -26,8 +26,10 @@ export default function Newsletter() {
           <Image
             className=""
             id={`newsletter-icon`}
-            src={Email}
+            src='/assets/email-icon.svg'
             alt="Icone de email"
+            width={18}
+            height={13}
           />
         </figure>
       </fieldset>

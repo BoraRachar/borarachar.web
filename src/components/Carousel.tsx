@@ -1,10 +1,10 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import ArrowLeftEnabled from "@/assets/carousel-arrow-left-enabled.svg";
-import ArrowLeftDisabled from "@/assets/carousel-arrow-left-disabled.svg";
-import ArrowRightEnabled from "@/assets/carousel-arrow-right-enabled.svg";
-import ArrowRightDisabled from "@/assets/carousel-arrow-right-disabled.svg";
+// import ArrowLeftEnabled from "@/assets/carousel-arrow-left-enabled.svg";
+// import ArrowLeftDisabled from "@/assets/carousel-arrow-left-disabled.svg";
+// import ArrowRightEnabled from "@/assets/carousel-arrow-right-enabled.svg";
+// import ArrowRightDisabled from "@/assets/carousel-arrow-right-disabled.svg";
 import Image from "next/image";
 
 /**
@@ -119,8 +119,8 @@ export default function Carousel({ children }: CarouselProps): JSX.Element {
                <Image
                   src={
                      currentMiddleItemIndex <= 1
-                        ? ArrowLeftDisabled
-                        : ArrowLeftEnabled
+                        ? "/assets/carousel-arrow-left-disabled.svg"
+                        : "/assets/carousel-arrow-left-enabled.svg"
                   }
                   width={70}
                   height={70}
@@ -135,8 +135,8 @@ export default function Carousel({ children }: CarouselProps): JSX.Element {
                <Image
                   src={
                      currentMiddleItemIndex === numberOfChildrens - 2
-                        ? ArrowRightDisabled
-                        : ArrowRightEnabled
+                        ? "/assets/carousel-arrow-right-disabled.svg"
+                        : "/assets/carousel-arrow-right-enabled.svg"
                   }
                   width={70}
                   height={70}

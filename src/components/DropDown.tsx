@@ -1,54 +1,66 @@
-'use client'
-import { useState, SyntheticEvent } from 'react';
-import Image from 'next/image';
-import plusIcon from '@/assets/plusIcon.svg';
-import minusIcon from '@/assets/minusIcon.svg';
+"use client";
+import { useState, SyntheticEvent } from "react";
+import Image from "next/image";
+// import plusIcon from "@/assets/plus-icon.svg";
+// import minusIcon from "@/assets/minus-icon.svg";
 
 interface DropDownProps {
-  id: number;
-  title: String;
-  message: string;
+   id: number;
+   title: String;
+   message: string;
 }
 
 export default function DropDown({ id, title, message }: DropDownProps) {
-  const [activeButton, setActiveButton] = useState(false);
+   const [activeButton, setActiveButton] = useState(false);
 
-  const handleClickButton = (event: SyntheticEvent) => {
-    event.preventDefault();
-    setActiveButton(!activeButton);
-  }
- 
-  const dropdownHeight = activeButton ? 'auto' : '89px';
+   const handleClickButton = (event: SyntheticEvent) => {
+      event.preventDefault();
+      setActiveButton(!activeButton);
+   };
 
-  return (
-      <details 
-          id={`dropdown-details-${id}`} 
-          className={`flex flex-col w-full min-h-${dropdownHeight} border-b mb-2 border-[#A7A7A7]`}
-        >
-        <summary 
-          className='list-none'
-          id={`dropdown-summary-${title}`} 
-        >
-          <div 
-            className='flex justify-between font-medium text-xl font-color-dark mb-4'
-            id={`dropdown-${title}`}
-          >
-            {title}
-            <button onClick={(event) => handleClickButton(event)} id={`dropdown-button-${title}`}>
-              {!activeButton ? (
-                <Image src={plusIcon} alt="" width={30} height={30} />
-              ) : (
-                <Image src={minusIcon} alt="" width={30} height={30} />
-              )}
-            </button>
-          </div>
-          <div 
-            className={`text-justify font-color-dark mb-5 overflow-hidden ${activeButton ? '' : 'line-clamp-2'}`}
-            id={`dropdown-${message}`}  
-          >
-            <p>{activeButton && message}</p>
-          </div>
-        </summary>
+   const dropdownHeight = activeButton ? "auto" : "89px";
+
+   return (
+      <details
+         id={`dropdown-details-${id}`}
+         className={`flex flex-col w-full min-h-${dropdownHeight} border-b mb-2 border-[#A7A7A7]`}
+      >
+         <summary className="list-none" id={`dropdown-summary-${title}`}>
+            <div
+               className="flex justify-between mb-4 text-xl font-medium font-color-dark"
+               id={`dropdown-${title}`}
+            >
+               {title}
+               <button
+                  onClick={(event) => handleClickButton(event)}
+                  id={`dropdown-button-${title}`}
+               >
+                  {!activeButton ? (
+                     <Image
+                        src="/assets/plus-icon.svg"
+                        alt="Plus icon"
+                        width={30}
+                        height={30}
+                     />
+                  ) : (
+                     <Image
+                        src="/assets/minus-icon.svg"
+                        alt="Minus icon"
+                        width={30}
+                        height={30}
+                     />
+                  )}
+               </button>
+            </div>
+            <div
+               className={`text-justify font-color-dark mb-5 overflow-hidden ${
+                  activeButton ? "" : "line-clamp-2"
+               }`}
+               id={`dropdown-${message}`}
+            >
+               <p>{activeButton && message}</p>
+            </div>
+         </summary>
       </details>
-  );
+   );
 }
