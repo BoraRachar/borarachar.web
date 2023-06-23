@@ -9,11 +9,11 @@ interface ButtonProps {
   title: string;
 }
 
-export default function Buttons({ 
+export default function Button({ 
   type, 
   customClassesNames, 
   onClick, 
-  icon, 
+  icon = null, 
   title, 
 }: ButtonProps) {
 

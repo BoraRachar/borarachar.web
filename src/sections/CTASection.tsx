@@ -1,59 +1,74 @@
 import Buttons from "@/components/Button";
 import SectionTitle from "@/components/SectionTitle/SectionTitle";
 import Image from "next/image";
-import bigcircle from "@/assets/BigCircle.svg";
-import smallcircle from "@/assets/SmallCircle.svg";
+// import BigCircle from "@/assets/big-circle-image.svg";
+// import SmallCircle from "@/assets/small-circle.svg";
 
 export default function CTASection() {
-  return (
-    <section id="cta-section" className="h-[442px] bg-[#724FD8] flex relative">
-      <div
-        id="cta-content-wrapper"
-        className="w-full h-full flex flex-col items-center z-10 justify-center gap-24"
+   return (
+      <section
+         id="cta-section"
+         className="h-[442px] bg-[#724FD8] flex relative"
       >
-        <SectionTitle
-          customClassesNames={{ header: "text-white" }}
-          title="E ai, bora rachar?"
-        />
-        <Buttons customClassesNames="w-40" type="secondary" title="Comece já" />
-      </div>
-      <div
-        id="cta-circles-wrapper"
-        className="w-full h-full flex overflow-hidden absolute"
-      >
-        <div
-          id="cta-leftcircles-wrapper"
-          className="w-2/4 flex flex-col h-full justify-between"
-        >
-          <Image
-            id="cta-leftcircle"
-            className="self-end mr-48 -translate-y-10"
-            src={smallcircle}
-            alt="pequeno circulo"
-          />
-          <Image
-            className="translate-y-32"
-            src={bigcircle}
-            alt="grande circulo"
-          />
-        </div>
-        <div
-          id="cta-rightcircles-wrapper"
-          className="w-2/4 flex flex-col h-full justify-between"
-        >
-          <Image
-            id="cta-rightcircle"
-            className="self-end transform rotate-180 -translate-y-32"
-            src={bigcircle}
-            alt="grande circulo"
-          />
-          <Image
-            className="ml-48 translate-y-10"
-            src={smallcircle}
-            alt="pequeno circulo"
-          />
-        </div>
-      </div>
-    </section>
-  );
+         <div
+            id="cta-content-wrapper"
+            className="z-10 flex flex-col items-center justify-center w-full h-full gap-24"
+         >
+            <SectionTitle
+               customClassesNames={{ header: "text-white" }}
+               title="E ai, bora rachar?"
+            />
+            <Buttons
+               customClassesNames="w-40"
+               type="secondary"
+               title="Comece já"
+            />
+         </div>
+         <div
+            id="cta-circles-wrapper"
+            className="absolute flex w-full h-full overflow-hidden"
+         >
+            <div
+               id="cta-leftcircles-wrapper"
+               className="flex flex-col justify-between w-2/4 h-full"
+            >
+               <Image
+                  id="cta-leftcircle"
+                  className="self-end mr-48 -translate-y-10"
+                  src="/assets/small-circle.svg"
+                  width={90}
+                  height={90}
+                  alt="pequeno circulo"
+               />
+               <Image
+                  className="translate-y-32"
+                  src="/assets/big-circle-image.svg"
+                  width={298}
+                  height={298}
+                  alt="grande circulo"
+               />
+            </div>
+            <div
+               id="cta-rightcircles-wrapper"
+               className="flex flex-col justify-between w-2/4 h-full"
+            >
+               <Image
+                  id="cta-rightcircle"
+                  className="self-end transform rotate-180 -translate-y-32"
+                  src="/assets/big-circle-image.svg"
+                  width={298}
+                  height={298}
+                  alt="grande circulo"
+               />
+               <Image
+                  className="ml-48 translate-y-10"
+                  src="/assets/small-circle.svg"
+                  width={90}
+                  height={90}
+                  alt="pequeno circulo"
+               />
+            </div>
+         </div>
+      </section>
+   );
 }

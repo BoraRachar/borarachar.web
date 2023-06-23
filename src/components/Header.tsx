@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import logo from '../assets/Logo.svg';
+// import logo from '../assets/logo.svg';
 
 export default function Header() {
     return (
@@ -8,7 +8,7 @@ export default function Header() {
             <nav className="flex items-center justify-center w-full h-28" id="menu">
                 <div className="flex justify-between w-10/12 h-14">
                     <Link href="#" id="logo">
-                        <Image src={logo} alt="Logo do Bora Rachar" />
+                        <Image src='/assets/logo.svg' alt="Logo do Bora Rachar" width={132} height={53}  />
                     </Link>
                     <div className="flex w-11/12">
                         <div className="flex items-center w-2/4 ml-16 space-x-4 text-lg">
