@@ -1,4 +1,5 @@
 import React from "react";
+import classNames from "classnames";
 
 interface CustomClassesNamesSectionTitleProps {
    header?: string;
@@ -12,33 +13,39 @@ interface SectionTitleProps {
    customClassesNames?: CustomClassesNamesSectionTitleProps;
 }
 
-// This component will be used in all of section titles, this need receive a title.
-// Description and custom classes names are optional.
-
 const SectionTitle = ({
    title,
    description,
    customClassesNames,
 }: SectionTitleProps) => {
+   const headerClasses = classNames(
+      "flex",
+      "flex-col",
+      "gap-8",
+      customClassesNames?.header
+   );
+   const titleClasses = classNames(
+      "text-5xl",
+      "leading-[65px]",
+      "font-medium",
+      customClassesNames?.title
+   );
+   const descriptionClasses = classNames(
+      "text-xl",
+      "text-[#5A5A5A]",
+      "font-normal",
+      customClassesNames?.description
+   );
+
    return (
-      <header
-         id={`section-title-header-${title}`}
-         className={`flex flex-col gap-8 ${customClassesNames?.header ?? ""}`}
-      >
-         <h2
-            id={`section-title-h2-${title}`}
-            className={`text-5xl leading-[65px] font-medium ${
-               customClassesNames?.title ?? ""
-            }`}
-         >
+      <header id={`section-title-header-${title}`} className={headerClasses}>
+         <h2 id={`section-title-h2-${title}`} className={titleClasses}>
             {title}
          </h2>
          {description && (
             <p
                id={`section-title-description-${title}`}
-               className={`text-xl text-[#5A5A5A] font-normal ${
-                  customClassesNames?.description ?? ""
-               }`}
+               className={descriptionClasses}
             >
                {description}
             </p>
