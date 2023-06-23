@@ -23,11 +23,11 @@ export default function DropDown({ id, title, message }: DropDownProps) {
    return (
       <details
          id={`dropdown-details-${id}`}
-         className={`flex flex-col w-full min-h-${dropdownHeight} border-b mb-2 border-[#A7A7A7]`}
+         className={`flex flex-col w-full min-h-${dropdownHeight} border-b mb-8 border-[#A7A7A7]`}
       >
          <summary className="list-none" id={`dropdown-summary-${title}`}>
             <div
-               className="flex justify-between mb-4 text-xl font-medium font-color-dark"
+               className="flex justify-between text-xl font-medium font-color-dark"
                id={`dropdown-${title}`}
             >
                {title}
@@ -53,12 +53,12 @@ export default function DropDown({ id, title, message }: DropDownProps) {
                </button>
             </div>
             <div
-               className={`text-justify font-color-dark mb-5 overflow-hidden ${
+               className={`text-justify font-color-dark mb-4 overflow-hidden ${
                   activeButton ? "" : "line-clamp-2"
                }`}
                id={`dropdown-${message}`}
             >
-               <p>{activeButton && message}</p>
+               <p className="mt-2">{activeButton && message}</p>
             </div>
          </summary>
       </details>
