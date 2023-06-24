@@ -1,4 +1,4 @@
-import Buttons from "@/components/Button";
+import Button from "@/components/Button";
 import SectionTitle from "@/components/SectionTitle/SectionTitle";
 import Image from "next/image";
 // import BigCircle from "@/assets/big-circle-image.svg";
@@ -18,8 +18,8 @@ export default function CTASection() {
                customClassesNames={{ header: "text-white" }}
                title="E ai, bora rachar?"
             />
-            <Buttons
-               customClassesNames="w-40"
+            <Button
+               customClassesNames="w-[162px]"
                type="secondary"
                title="Comece já"
             />

@@ -1,9 +1,13 @@
+import { ReactNode } from "react";
+import classNames from "classnames";
+
 interface CardsCustomClassesNames {
    primary?: string;
    secondary?: string;
 }
+
 interface CardProps {
-   children: React.ReactNode;
+   children: ReactNode;
    type: "primary" | "secondary";
    id: string;
    customClassesNames?: CardsCustomClassesNames;
@@ -15,27 +19,42 @@ export default function Card({
    id,
    customClassesNames,
 }: CardProps) {
-   if (type === "primary")
+   const cardClasses = classNames(
+      type === "primary" ? "bg-[#724fd8]" : "",
+      "rounded-lg",
+      "py-14",
+      "px-7",
+      "flex",
+      "flex-col",
+      "items-start",
+      "shadow-card-custom",
+      "transition-all",
+      "ease-out",
+      "last:mr-10",
+      customClassesNames?.primary
+   );
+
+   const secondaryCardClasses = classNames(
+      "flex",
+      "flex-col",
+      "items-center",
+      "gap-7",
+      customClassesNames?.secondary
+   );
+
+   if (type === "primary") {
       return (
-         <section
-            className={`bg-[#724fd8] rounded-lg py-14 px-7 flex flex-col items-start shadow-card-custom transition-all ease-out last:mr-10 duration-75 ${
-               customClassesNames?.primary ?? ""
-            }`}
-            id={id}
-         >
+         <section className={cardClasses} id={id}>
             {children}
          </section>
       );
-   else if (type === "secondary")
+   } else if (type === "secondary") {
       return (
-         <section
-            className={`flex flex-col items-center gap-7 ${
-               customClassesNames?.secondary ?? ""
-            }`}
-            id={id}
-         >
+         <section className={secondaryCardClasses} id={id}>
             {children}
          </section>
       );
-   else return null;
+   } else {
+      return null;
+   }
 }
