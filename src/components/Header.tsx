@@ -1,6 +1,5 @@
 import Image from "next/image";
 import Link from "next/link";
-// import logo from '../assets/logo.svg';
 
 export default function Header() {
     return (
@@ -21,7 +20,7 @@ export default function Header() {
                             <Link href="#" className="mr-8" id="link-login">Login</Link>
                             <Link href="#">
                                 <button
-                                    className="w-48 font-semibold text-white rounded-md bg-dark-button h-14"
+                                    className="w-[181px] font-semibold text-white rounded-md bg-secondary h-12"
                                     id="button-criar-conta"
                                 >
                                     Criar Conta
