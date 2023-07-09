@@ -40,7 +40,7 @@ const servicesCardsList = [
 export default function ServicesSection() {
    return (
       <section className="w-11/12 mx-auto py-36">
-        <SectionTitle title="Stylish and lightweight down jacket" customClassesNames={{title: 'text-center'}} />
+        <SectionTitle title="Stylish and lightweight down jacket" customClassesNames={{title: 'text-center font-bold'}} />
          <Carousel>
             {servicesCardsList.map((card, index) => (
                <Card

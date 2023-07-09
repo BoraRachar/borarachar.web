@@ -32,7 +32,7 @@ export default function FAQSection() {
                title="Perguntas Frequentes"
                customClassesNames={{
                   header: "mb-14 ",
-                  title: "text-5xl",
+                  title: "text-5xl font-bold",
                   description: "",
                }}
             />

@@ -13,8 +13,8 @@ export default function HeroSection() {
                description="Easy to wear and versatile, keeps you warm and fashionable in autumn and winter"
                customClassesNames={{
                   header: "pb-10 ",
-                  title: "text-6xl max-w-[20ch] leading-[72px]",
-                  description: "max-w-[30ch] leading-7",
+                  title: "text-6xl max-w-[20ch] leading-[72px] font-bold",
+                  description: "max-w-[30ch] leading-7 font-normal",
                }}
             />
             <Buttons
