@@ -10,11 +10,13 @@ module.exports = {
       extend: {
          colors: {
             primary: "#48358C",
-            "dark-primary": "#131025",
             secondary: "#F27405",
-            neutral: "#F2F2F2",
-            "dark-button": "#222225",
-            "font-color-dark": "#000000",
+            neutral: {
+               black: "#232324",
+               white: "#f2f2f3",
+               gray: "#4d4a4f",
+            }
+
          },
         boxShadow: {
             "card-custom": "17px 18px 0px 3px rgba(165,134,255,1)",

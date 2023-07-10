@@ -23,7 +23,7 @@ export default function DropDown({ id, title, message }: DropDownProps) {
    return (
       <details
          id={`dropdown-details-${id}`}
-         className={`flex flex-col w-full min-h-${dropdownHeight} border-b mb-8 border-[#A7A7A7]`}
+         className={`flex flex-col font-normal w-full min-h-${dropdownHeight} border-b mb-8 border-[#A7A7A7]`}
       >
          <summary className="list-none" id={`dropdown-summary-${title}`}>
             <div
