@@ -15,7 +15,7 @@ export default function CTASection() {
           customClassesNames={{ header: "text-white" }}
           title="E ai, bora rachar?"
         />
-        <div id="cta-button-wrapper" className="w-[162px]">
+        <div id="cta-button-wrapper" className="w-[330px]">
           <Button type="secondary" title="Comece já" />
         </div>
       </div>
