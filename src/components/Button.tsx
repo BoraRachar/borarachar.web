@@ -23,7 +23,7 @@ export default function Button({
    };
 
    const buttonBaseClass =
-      type === "primary" ? "bg-[#724fd8]" : "border-[1px] border-white";
+      type === "primary" ? "bg-secondary" : "border-[1px] border-white";
 
    const buttonClasses = classNames(
       "w-full",
