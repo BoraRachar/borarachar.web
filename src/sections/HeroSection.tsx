@@ -20,7 +20,7 @@ export default function HeroSection() {
             <Buttons
                title="Comece a economizar"
                type="primary"
-               customClassesNames="max-w-[300px]"
+               customClassesNames="max-w-[395px] h-14"
             />
          </section>
          <figure id="hero-section-right">
