@@ -1,19 +1,20 @@
 import Button from "@/components/Button";
 import SectionTitle from "@/components/SectionTitle/SectionTitle";
 import Image from "next/image";
-// import BigCircle from "@/assets/big-circle-image.svg";
-// import SmallCircle from "@/assets/small-circle.svg";
 
 export default function CTASection() {
   return (
     <section id="cta-section" className="h-[442px] bg-[#724FD8] flex relative">
       <div
         id="cta-content-wrapper"
-        className="z-10 flex flex-col items-center justify-center w-full h-full gap-24"
+        className="z-10 flex flex-col items-center justify-center w-full h-full gap-8"
       >
-        <SectionTitle
-          customClassesNames={{ header: "text-white" }}
-          title="E ai, bora rachar?"
+        <Image 
+          id="cta-logo"
+          src="/assets/logo-white.svg"
+          width={330}
+          height={138}
+          alt="Logo do Bora Rachar"
         />
         <div id="cta-button-wrapper" className="w-[162px]">
           <Button type="secondary" title="Comece já" />
