@@ -12,7 +12,7 @@ export default function Checkbox({ title }: CheckboxProps) {
   return (
     <div className="flex flex-row gap-[8px] items-center">
       <div
-        className="w-[16px] h-[16px] border-[1px] border-black rounded-[4px] relative flex items-center justify-center"
+        className="w-[16px] h-[16px] border-[1px] border-neutral-black rounded-[4px] relative flex items-center justify-center"
         id={`checkbox-input_wrapper-${title}`}
         onClick={() => setChecked(!checked)}
       >
@@ -21,7 +21,7 @@ export default function Checkbox({ title }: CheckboxProps) {
           name="checkbox"
           checked={checked}
           id={`checkbox-${title}`}
-          className="appearance-none rounded-[10px] border-[0px] border-black"
+          className="appearance-none rounded-[10px] border-[0px] border-neutral-black"
         />
         {checked && (
           <Image
