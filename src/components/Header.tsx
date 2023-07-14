@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import { ButtonCustomizer } from "@/components/ButtonCustomizer";
 
 export default function Header() {
     return (
@@ -18,14 +19,13 @@ export default function Header() {
                         </div>
                         <div className="flex items-center justify-end w-2/4">
                             <Link href="#" className="mr-8 text-base font-bold text-neutral-black" id="link-login">Login</Link>
-                            <Link href="#">
-                                <button
-                                    className="w-[181px] font-semibold text-neutral-white rounded-md bg-secondary h-12"
-                                    id="button-criar-conta"
-                                >
-                                    Criar Conta
-                                </button>
-                            </Link>
+                            <div className="w-[181px]">
+                                <Link href="#">
+                                    <ButtonCustomizer.Root type="primary" customClassesNames="flex items-center justify-center h-12">
+                                        <ButtonCustomizer.Title title="Criar Conta" customClassesNames="font-semibold text-base text-neutral-white "/>
+                                    </ButtonCustomizer.Root> 
+                                </Link>
+                            </div>
                         </div>
                     </div>
                 </div>

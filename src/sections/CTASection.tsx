@@ -1,8 +1,6 @@
-import Button from "@/components/Button";
 import SectionTitle from "@/components/SectionTitle/SectionTitle";
 import Image from "next/image";
-// import BigCircle from "@/assets/big-circle-image.svg";
-// import SmallCircle from "@/assets/small-circle.svg";
+import { ButtonCustomizer } from "@/components/ButtonCustomizer";
 
 export default function CTASection() {
   return (
@@ -16,7 +14,9 @@ export default function CTASection() {
           title="E ai, bora rachar?"
         />
         <div id="cta-button-wrapper" className="w-[330px]">
-          <Button type="secondary" title="Comece já" />
+          <ButtonCustomizer.Root type="secondary">
+            <ButtonCustomizer.Title title="Comece já" customClassesNames="font-semibold text-base text-neutral-white "/>
+          </ButtonCustomizer.Root> 
         </div>
       </div>
       <div

@@ -1,8 +1,6 @@
-"use client";
+'use client';
 import { useState, SyntheticEvent } from "react";
 import Image from "next/image";
-// import plusIcon from "@/assets/plus-icon.svg";
-// import minusIcon from "@/assets/minus-icon.svg";
 
 interface DropDownProps {
    id: number;

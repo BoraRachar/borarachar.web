@@ -1,5 +1,6 @@
-import Buttons from "@/components/Button";
+import Image from "next/image";
 import SectionTitle from "@/components/SectionTitle/SectionTitle";
+import { ButtonCustomizer } from "@/components/ButtonCustomizer";
 
 export default function HeroSection() {
    return (
@@ -17,11 +18,9 @@ export default function HeroSection() {
                   description: "max-w-[30ch] leading-7 font-normal",
                }}
             />
-            <Buttons
-               title="Comece a economizar"
-               type="primary"
-               customClassesNames="max-w-[395px] h-14"
-            />
+            <ButtonCustomizer.Root type="primary" customClassesNames="max-w-[395px] h-14">
+               <ButtonCustomizer.Title title="Comece a economizar" customClassesNames="text-xl font-bold text-neutral-white"/>
+            </ButtonCustomizer.Root>
          </section>
          <figure id="hero-section-right">
             {/* Placeholder */}

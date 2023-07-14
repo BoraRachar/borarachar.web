@@ -14,7 +14,10 @@ module.exports = {
             neutral: {
                black: "#232324",
                white: "#f2f2f3",
-               gray: "#4d4a4f",
+               gray:{
+                  "500":"#4d4a4f",
+                  "300": "#949295"
+               },
             }
 
          },

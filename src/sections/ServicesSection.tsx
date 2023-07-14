@@ -1,8 +1,8 @@
-"use client";
-import Buttons from "@/components/Button";
+'use client';
 import Card from "@/components/Card";
 import Carousel from "@/components/Carousel";
 import SectionTitle from "@/components/SectionTitle/SectionTitle";
+import { ButtonCustomizer } from "@/components/ButtonCustomizer";
 
 const servicesCardsList = [
    {
@@ -60,7 +60,9 @@ export default function ServicesSection() {
                            {card.description}
                         </p>
                      </div>
-                     <Buttons type="secondary" title="Ver grupos" />
+                     <ButtonCustomizer.Root type="secondary">
+                        <ButtonCustomizer.Title title="Ver grupos" customClassesNames="font-semibold text-base text-neutral-white "/>
+                     </ButtonCustomizer.Root> 
                   </div>
                </Card>
             ))}
