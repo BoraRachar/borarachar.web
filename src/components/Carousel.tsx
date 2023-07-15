@@ -1,10 +1,5 @@
-"use client";
-
+'use client';
 import { useEffect, useRef, useState } from "react";
-// import ArrowLeftEnabled from "@/assets/carousel-arrow-left-enabled.svg";
-// import ArrowLeftDisabled from "@/assets/carousel-arrow-left-disabled.svg";
-// import ArrowRightEnabled from "@/assets/carousel-arrow-right-enabled.svg";
-// import ArrowRightDisabled from "@/assets/carousel-arrow-right-disabled.svg";
 import Image from "next/image";
 
 /**
