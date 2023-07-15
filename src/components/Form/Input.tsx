@@ -1,14 +1,20 @@
 "use client";
 import Image from "next/image";
-import { useState } from "react";
+import { HTMLInputTypeAttribute, useState } from "react";
+import {
+  UseControllerProps,
+  useController,
+  FieldValues,
+} from "react-hook-form";
 
-interface InputProps {
-  type: "text" | "password";
+interface InputProps<T extends FieldValues = FieldValues>
+  extends UseControllerProps<T> {
+  type: HTMLInputTypeAttribute;
   placeholder?: string;
   icon?: { src: string; pos: "left" | "right" };
   width?: string;
   label?: string;
-  iconFunction?: () => void;
+  onClickIcon?: () => void;
 }
 
 function getFlexDirection(iconPos: "left" | "right" | undefined) {
@@ -16,27 +22,37 @@ function getFlexDirection(iconPos: "left" | "right" | undefined) {
     return "flex-row";
   } else if (iconPos === "right") {
     return "flex-row-reverse";
-  } else if (iconPos === undefined) {
-    return "";
+  } else {
+    return null;
   }
 }
 
 export default function Input({
   type,
   icon,
+  name,
   placeholder,
   width = "w-[410px]",
   label,
-  iconFunction,
-}: InputProps) {
-  const [input, setInput] = useState<string>("");
+  onClickIcon,
+  control,
+}: InputProps<any>) {
+  const {
+    field: { value, onChange, onBlur },
+    fieldState: { invalid, error },
+  } = useController({ control, name });
   return (
-    <div className="input-container">
+    <fieldset className={`input-container-${name}`}>
       {label && (
-        <label className="text-neutral-black font-medium">{label}</label>
+        <label
+          htmlFor={name}
+          className="text-neutral-black font-medium text-[16px]"
+        >
+          {label}
+        </label>
       )}
       <div
-        id="input-wrapper"
+        id={`input-wrapper-${name}`}
         className={`flex ${getFlexDirection(
           icon?.pos
         )} p-[11px] h-[46px] ${width} ${
@@ -45,9 +61,10 @@ export default function Input({
       >
         {icon && (
           <Image
-            id="input-icon"
+            onClick={onClickIcon}
+            id={`input-icon-${name}`}
             className={`${
-              iconFunction ? "cursor-pointer" : "pointer-events-none"
+              onClickIcon ? "cursor-pointer" : "pointer-events-none"
             } absolute self-center z-0 ${
               icon.pos === "left" ? "left-3" : "right-3"
             }`}
@@ -58,19 +75,28 @@ export default function Input({
           />
         )}
         <input
-          id="input"
+          id={name}
           placeholder={placeholder}
-          onChange={(event) => setInput(event.target.value)}
           className={`${
             icon?.pos === "left" ? "pl-7" : "pr-7"
           } bg-transparent ${
-            type == "password" && input.length > 0
+            type == "password" && value.length > 0
               ? "text-[24px] tracking-wider"
               : "text-[16px]"
           } w-full text-neutral-gray outline-none font-medium`}
           type={type}
+          onChange={onChange}
+          onBlur={onBlur}
         />
       </div>
-    </div>
+      {invalid && (
+        <p
+          id={`input-error-${name}`}
+          className="text-red-600 text-[14px] italic mt-[8px]"
+        >
+          {error?.message}
+        </p>
+      )}
+    </fieldset>
   );
 }
