@@ -1,23 +1,22 @@
-import Button from "@/components/Button";
 import SectionTitle from "@/components/SectionTitle/SectionTitle";
 import Image from "next/image";
+import { ButtonCustomizer } from "@/components/ButtonCustomizer";
 
 export default function CTASection() {
   return (
     <section id="cta-section" className="h-[442px] bg-[#724FD8] flex relative">
       <div
         id="cta-content-wrapper"
-        className="z-10 flex flex-col items-center justify-center w-full h-full gap-8"
+        className="z-10 flex flex-col items-center justify-center w-full h-full gap-24"
       >
-        <Image 
-          id="cta-logo"
-          src="/assets/logo-white.svg"
-          width={330}
-          height={138}
-          alt="Logo do Bora Rachar"
+        <SectionTitle
+          customClassesNames={{ header: "text-white" }}
+          title="E ai, bora rachar?"
         />
-        <div id="cta-button-wrapper" className="w-[162px]">
-          <Button type="secondary" title="Comece já" />
+        <div id="cta-button-wrapper" className="w-[330px]">
+          <ButtonCustomizer.Root type="secondary">
+            <ButtonCustomizer.Title title="Comece já" customClassesNames="font-semibold text-base text-neutral-white "/>
+          </ButtonCustomizer.Root> 
         </div>
       </div>
       <div
