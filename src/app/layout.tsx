@@ -4,7 +4,6 @@ import { Roboto } from "next/font/google";
 import "./globals.css";
 import { Provider } from "react-redux";
 import { store } from "@/store";
-import Header from "@/components/Header";
 
 const roboto = Roboto({ 
    weight: ["400", "500", "700"],
@@ -23,7 +22,6 @@ export default function RootLayout({
          <Provider store={store}>
             <QueryClientProvider client={queryClient}>
                <body className={roboto.className}>
-                  <Header />
                   {children}
                </body>
             </QueryClientProvider>
