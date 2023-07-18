@@ -25,7 +25,7 @@ export function ButtonRoot({
 
   const buttonBaseClass =
     type === "primary" ? "bg-secondary": 
-    type === "secondary" ? "border-[1px] border-neutral-white":
+    type === "secondary" ? "border-[1px]":
     type === "tertiary" ? "border-none": "";
 
   const iconPositionClass = 
