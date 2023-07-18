@@ -32,7 +32,7 @@ export default function Input({
   icon,
   name,
   placeholder,
-  width = "w-[410px]",
+  width,
   label,
   onClickIcon,
   control,
@@ -42,7 +42,7 @@ export default function Input({
     fieldState: { invalid, error },
   } = useController({ control, name });
   return (
-    <fieldset className={`input-container-${name}`}>
+    <fieldset className={`input-container-${name} w-full`}>
       {label && (
         <label
           htmlFor={name}
@@ -83,7 +83,7 @@ export default function Input({
             type == "password" && value.length > 0
               ? "text-[24px] tracking-wider"
               : "text-[16px]"
-          } w-full text-neutral-gray outline-none font-medium`}
+          } w-full text-neutral-gray-500 placeholder:text-neutral-gray-500 outline-none font-medium`}
           type={type}
           onChange={onChange}
           onBlur={onBlur}

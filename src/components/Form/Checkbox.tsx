@@ -1,29 +1,35 @@
 "use client";
 import { useState } from "react";
 import Image from "next/image";
+import { useDispatch, useSelector } from "react-redux";
+import { setRememberUser } from "@/features/AuthSlice";
 
 interface CheckboxProps {
   title: string;
 }
 
 export default function Checkbox({ title }: CheckboxProps) {
-  const [checked, setChecked] = useState(false);
+  
+  const { rememberUser } = useSelector((state: any) => state.auth);
+  const dispatch = useDispatch();
 
   return (
     <div className="flex flex-row gap-[8px] items-center">
       <div
         className="w-[16px] h-[16px] border-[1px] border-neutral-black rounded-[4px] relative flex items-center justify-center"
         id={`checkbox-input_wrapper-${title}`}
-        onClick={() => setChecked(!checked)}
+        onClick={() => dispatch(setRememberUser(!rememberUser))}
       >
         <input
           type="checkbox"
           name="checkbox"
-          checked={checked}
+          // checked={rememberUser}
+          readOnly
+          defaultChecked={rememberUser}
           id={`checkbox-${title}`}
           className="appearance-none rounded-[10px] border-[0px] border-neutral-black"
         />
-        {checked && (
+        {rememberUser && (
           <Image
             className="absolute self-center select-none"
             id={`checkbox-checked_icon`}

@@ -25,7 +25,7 @@ export function ButtonRoot({
 
   const buttonBaseClass =
     type === "primary" ? "bg-secondary": 
-    type === "secondary" ? "border-[1px] border-neutral-white":
+    type === "secondary" ? "border-[1px]":
     type === "tertiary" ? "border-none": "";
 
   const iconPositionClass = 
@@ -34,6 +34,7 @@ export function ButtonRoot({
 
   const buttonClasses = classNames(
       `flex ${iconPositionClass}`,
+      "gap-1",
       "items-center",
       "justify-center",
       "w-full",
