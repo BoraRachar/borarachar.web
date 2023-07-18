@@ -1,3 +1,4 @@
+// Branch criada para realização do testes da página de login.
 import Image from "next/image";
 export default function LoginLayout({
   children,
