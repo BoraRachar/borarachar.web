@@ -34,6 +34,7 @@ export function ButtonRoot({
 
   const buttonClasses = classNames(
       `flex ${iconPositionClass}`,
+      "gap-1",
       "items-center",
       "justify-center",
       "w-full",
