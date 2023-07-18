@@ -18,13 +18,14 @@ export default function Checkbox({ title }: CheckboxProps) {
       <div
         className="w-[16px] h-[16px] border-[1px] border-neutral-black rounded-[4px] relative flex items-center justify-center"
         id={`checkbox-input_wrapper-${title}`}
-        // onClick={() => dispatch(setRememberUser(!rememberUser))}
+        onClick={() => dispatch(setRememberUser(!rememberUser))}
       >
         <input
           type="checkbox"
           name="checkbox"
-          checked={rememberUser}
-          onChange={(() => console.log('Checkbox'))}
+          // checked={rememberUser}
+          readOnly
+          defaultChecked={rememberUser}
           id={`checkbox-${title}`}
           className="appearance-none rounded-[10px] border-[0px] border-neutral-black"
         />
