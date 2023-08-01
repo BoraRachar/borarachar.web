@@ -16,7 +16,7 @@ interface AuthFormFields extends FieldValues {
 }
 
 const authFormSchema = yup.object().shape({
-   email: yup.string().email("E-mail inválido").required("Campo Obrigatório"),
+   email: yup.string().email("E-mail inválido").required("Campo obrigatório"),
    password: yup.string().required("Senha obrigatória"),
 });
 export default function LoginForm() {
