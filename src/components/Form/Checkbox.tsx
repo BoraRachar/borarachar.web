@@ -20,7 +20,8 @@ export default function Checkbox({
       <fieldset className="flex flex-row items-center gap-2">
          <div
             className="w-4 h-4 border border-[#B3B3B3] rounded-sm relative flex items-center justify-center"
-            id={`checkbox-input_wrapper-${title}`}
+            id={`checkbox-input-wrapper-${title}`}
+            data-testid={`checkbox-input-wrapper-${title}`}
             onClick={() => handleCheckboxClick()}
          >
             <input
@@ -29,6 +30,7 @@ export default function Checkbox({
                readOnly
                checked={currentState}
                id={`checkbox-input-${title}`}
+               data-testid={`checkbox-input-${title}`}
                className="appearance-none rounded-xl"
             />
             {currentState && (
@@ -43,6 +45,7 @@ export default function Checkbox({
          </div>
          <label
             id={`checkbox-label-${title}`}
+            data-testid={`checkbox-label-${title}`}
             htmlFor={`checkbox-input-${title}`}
             className="text-sm font-normal text-[#5B585C]"
          >
