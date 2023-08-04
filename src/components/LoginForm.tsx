@@ -9,6 +9,8 @@ import Input from "@/components/Form/Input";
 import Checkbox from "./Form/Checkbox";
 import { useSelector, useDispatch } from "react-redux";
 import { ButtonCustomizer } from "./ButtonCustomizer";
+import { RootState } from "@/store";
+import { setRememberUser } from "@/features/AuthSlice";
 
 interface AuthFormFields extends FieldValues {
    email: string;
@@ -19,8 +21,10 @@ const authFormSchema = yup.object().shape({
    email: yup.string().email("E-mail inválido").required("Campo Obrigatório"),
    password: yup.string().required("Senha obrigatória"),
 });
+
 export default function LoginForm() {
-   const { rememberUser } = useSelector((state: any) => state.auth);
+   const dispatch = useDispatch();
+   const { rememberUser } = useSelector((state: RootState) => state.auth);
 
    const { control, handleSubmit } = useForm<AuthFormFields>({
       defaultValues: { email: "", password: "" },
@@ -39,7 +43,7 @@ export default function LoginForm() {
     sm:border-[#DBDBDC] sm:justify-start sm:items-start sm:w-full sm:pb-16
     "
       >
-         <div className="hidden sm:block  sm:ml-6">
+         <div className="hidden sm:block sm:ml-6">
             <Link id="link back page" href="/">
                <Image
                   src="/assets/arrow-back.svg"
@@ -49,7 +53,7 @@ export default function LoginForm() {
                />
             </Link>
          </div>
-         <div className="flex justify-center w-full items-center mt-4 mb-4">
+         <div className="flex items-center justify-center w-full mt-4 mb-4">
             <Image
                id="logo-form"
                src="/assets/logo.svg"
@@ -58,7 +62,7 @@ export default function LoginForm() {
                height={88}
             />
          </div>
-         <div className="w-full mb-4 px-8 sm:mb-6">
+         <div className="w-full px-8 mb-4 sm:mb-6">
             <SectionTitle
                title="Seja bem-vindo!"
                customClassesNames={{
@@ -95,8 +99,14 @@ export default function LoginForm() {
                placeholder="Digite sua senha"
                icon={{ src: "/assets/lock.svg", pos: "left" }}
             />
-            <div className="flex flex-col sm:flex-row sm:justify-between sm:w-full gap-2 mt-2 sm:hidden lg:flex">
-               <Checkbox title="Manter-me conectado" />
+            <div className="flex flex-col gap-2 mt-2 sm:flex-row sm:justify-between sm:w-full sm:hidden lg:flex">
+               <Checkbox
+                  title="Manter-me conectado"
+                  currentState={rememberUser}
+                  onClickFunction={() => {
+                     dispatch(setRememberUser(!rememberUser));
+                  }}
+               />
                <Link href="#">Esqueci minha senha</Link>
             </div>
             <ButtonCustomizer.Root
@@ -109,15 +119,11 @@ export default function LoginForm() {
                />
             </ButtonCustomizer.Root>
          </form>
-         <div className="px-8 w-full">
+         <div className="w-full px-8">
             <div className="flex items-center w-full gap-4 sm:my-4">
                <div className="flex-1 h-[1px] bg-[#dbdbdc]"></div>
-               <p className="text-neutral-black text-base">ou</p>
+               <p className="text-base text-neutral-black">ou</p>
                <div className="flex-1 h-[1px] bg-[#dbdbdc]"></div>
-            </div>
-            <div className="hidden sm:flex sm:max-w-[80%] sm:mx-auto sm:flex-row sm:justify-between gap-2 mt-2 lg:hidden">
-               <Checkbox title="Manter-me conectado" />
-               <Link href="#">Esqueci minha senha</Link>
             </div>
             <div className="sm:max-w-[80%] mx-auto">
                <ButtonCustomizer.Root

@@ -1,48 +1,53 @@
 "use client";
-import { useState } from "react";
 import Image from "next/image";
-import { useDispatch, useSelector } from "react-redux";
-import { setRememberUser } from "@/features/AuthSlice";
 
 interface CheckboxProps {
-  title: string;
+   title: string;
+   currentState: boolean;
+   onClickFunction: () => void;
 }
 
-export default function Checkbox({ title }: CheckboxProps) {
-  
-  const { rememberUser } = useSelector((state: any) => state.auth);
-  const dispatch = useDispatch();
+export default function Checkbox({
+   title,
+   currentState,
+   onClickFunction,
+}: CheckboxProps) {
+   const handleCheckboxClick = () => {
+      onClickFunction();
+   };
 
-  return (
-    <div className="flex flex-row gap-[8px] items-center">
-      <div
-        className="w-[16px] h-[16px] border-[1px] border-neutral-black rounded-[4px] relative flex items-center justify-center"
-        id={`checkbox-input_wrapper-${title}`}
-        onClick={() => dispatch(setRememberUser(!rememberUser))}
-      >
-        <input
-          type="checkbox"
-          name="checkbox"
-          // checked={rememberUser}
-          readOnly
-          defaultChecked={rememberUser}
-          id={`checkbox-${title}`}
-          className="appearance-none rounded-[10px] border-[0px] border-neutral-black"
-        />
-        {rememberUser && (
-          <Image
-            className="absolute self-center select-none"
-            id={`checkbox-checked_icon`}
-            src="/assets/checked-icon.svg"
-            alt="Icone de email"
-            width={6}
-            height={4}
-          />
-        )}
-      </div>
-      <label id={`checkbox-title-${title}`} className="font-normal text-sm">
-        {title}
-      </label>
-    </div>
-  );
+   return (
+      <fieldset className="flex flex-row items-center gap-2">
+         <div
+            className="w-4 h-4 border border-[#B3B3B3] rounded-sm relative flex items-center justify-center"
+            id={`checkbox-input_wrapper-${title}`}
+            onClick={() => handleCheckboxClick()}
+         >
+            <input
+               type="checkbox"
+               name="checkbox"
+               readOnly
+               checked={currentState}
+               id={`checkbox-input-${title}`}
+               className="appearance-none rounded-xl"
+            />
+            {currentState && (
+               <Image
+                  className="absolute self-center rounded-sm select-none bg-primary"
+                  id={`checkbox-checked-icon-${title}`}
+                  src="/assets/checked-icon.svg"
+                  alt="Icone de email"
+                  fill={true}
+               />
+            )}
+         </div>
+         <label
+            id={`checkbox-label-${title}`}
+            htmlFor={`checkbox-input-${title}`}
+            className="text-sm font-normal text-[#5B585C]"
+         >
+            {title}
+         </label>
+      </fieldset>
+   );
 }
