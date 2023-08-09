@@ -9,8 +9,10 @@ import Input from "@/components/Form/Input";
 import Checkbox from "./Form/Checkbox";
 import { useSelector, useDispatch } from "react-redux";
 import { ButtonCustomizer } from "./ButtonCustomizer";
+import { InputCustomizer } from "./InputCustomizer";
 import { RootState } from "@/store";
 import { setRememberUser } from "@/features/AuthSlice";
+import { LockSimple } from "phosphor-react";
 
 interface AuthFormFields extends FieldValues {
    email: string;
@@ -83,6 +85,27 @@ export default function LoginForm() {
             className="flex flex-col gap-2 w-full px-8 sm:max-w-[80%] 
       sm:justify-center sm:items-center sm:mx-auto"
          >
+            <InputCustomizer.Root 
+               name="password"
+               type="password"
+               label="Senha"
+               prepend={() => (
+                  <LockSimple 
+                     width={24} 
+                     height={24}
+                     weight="bold"
+                     color="#637381"
+                  />
+               )}
+               append={() => (
+                  <Image
+                     src="/assets/eye-slash.svg"
+                     alt="Ícone de e-mail"
+                     width={20}
+                     height={20}
+                  />
+               )}
+            />
             <Input
                control={control}
                name="email"
@@ -91,6 +114,7 @@ export default function LoginForm() {
                placeholder="Digite seu e-mail"
                icon={{ src: "/assets/mail.svg", pos: "left" }}
             />
+           
             <Input
                control={control}
                name="password"
