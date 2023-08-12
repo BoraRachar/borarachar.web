@@ -36,3 +36,4 @@ next-env.d.ts
 
 # env
 src/utils/constants.ts
+.env
