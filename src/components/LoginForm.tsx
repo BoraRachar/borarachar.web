@@ -12,7 +12,14 @@ import { ButtonCustomizer } from "./ButtonCustomizer";
 import { InputCustomizer } from "./InputCustomizer";
 import { RootState } from "@/store";
 import { setRememberUser } from "@/features/AuthSlice";
-import { LockSimple } from "phosphor-react";
+import {
+   EnvelopeSimple,
+   Eye,
+   EyeClosed,
+   EyeSlash,
+   LockSimple,
+} from "phosphor-react";
+import { useState } from "react";
 
 interface AuthFormFields extends FieldValues {
    email: string;
@@ -25,10 +32,15 @@ const authFormSchema = yup.object().shape({
 });
 
 export default function LoginForm() {
+   const [isShowingPassword, setIsShowingPassword] = useState(false);
    const dispatch = useDispatch();
    const { rememberUser } = useSelector((state: RootState) => state.auth);
 
-   const { control, handleSubmit } = useForm<AuthFormFields>({
+   const {
+      control,
+      handleSubmit,
+      formState: { errors },
+   } = useForm<AuthFormFields>({
       defaultValues: { email: "", password: "" },
       mode: "onBlur",
       resolver: yupResolver<AuthFormFields>(authFormSchema),
@@ -85,44 +97,46 @@ export default function LoginForm() {
             className="flex flex-col gap-2 w-full px-8 sm:max-w-[80%] 
       sm:justify-center sm:items-center sm:mx-auto"
          >
-            <InputCustomizer.Root 
-               name="password"
-               type="password"
-               label="Senha"
-               prepend={() => (
-                  <LockSimple 
-                     width={24} 
-                     height={24}
-                     weight="bold"
-                     color="#637381"
-                  />
-               )}
-               append={() => (
-                  <Image
-                     src="/assets/eye-slash.svg"
-                     alt="Ícone de e-mail"
-                     width={20}
-                     height={20}
-                  />
-               )}
-            />
-            <Input
+            {/* Email input */}
+            <InputCustomizer.Root
+               label="Email"
+               // @ts-ignore
                control={control}
                name="email"
-               label="E-mail"
-               type="email"
-               placeholder="Digite seu e-mail"
-               icon={{ src: "/assets/mail.svg", pos: "left" }}
-            />
-           
-            <Input
+            >
+               <InputCustomizer.Icon
+                  icon={EnvelopeSimple}
+                  isInvalid={errors.email ? true : false}
+               />
+               <InputCustomizer.Field
+                  name="email"
+                  type="text"
+                  // @ts-ignore
+                  control={control}
+               />
+            </InputCustomizer.Root>
+            {/* Password input */}
+            <InputCustomizer.Root
+               label="Senha"
+               // @ts-ignore
                control={control}
                name="password"
-               label="Senha"
-               type="password"
-               placeholder="Digite sua senha"
-               icon={{ src: "/assets/lock.svg", pos: "left" }}
-            />
+            >
+               <InputCustomizer.Icon
+                  icon={LockSimple}
+                  isInvalid={errors.password ? true : false}
+               />
+               <InputCustomizer.Field
+                  name="password"
+                  type={isShowingPassword ? "text" : "password"}
+                  // @ts-ignore
+                  control={control}
+               />
+               <InputCustomizer.Icon
+                  icon={isShowingPassword ? Eye : EyeSlash}
+                  onClick={() => setIsShowingPassword(!isShowingPassword)}
+               />
+            </InputCustomizer.Root>
             <div className="flex flex-col gap-2 mt-2 sm:flex-row sm:justify-between sm:w-full sm:hidden lg:flex">
                <Checkbox
                   title="Manter-me conectado"

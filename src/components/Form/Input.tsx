@@ -27,20 +27,9 @@ function getFlexDirection(iconPos: "left" | "right" | undefined) {
   }
 }
 
-export default function Input({
-  type,
-  icon,
-  name,
-  placeholder,
-  width,
-  label,
-  onClickIcon,
-  control,
-}: InputProps<any>) {
-  const {
-    field: { value, onChange, onBlur },
-    fieldState: { invalid, error },
-  } = useController({ control, name });
+export default function Input({type, icon, name, placeholder, width, label, onClickIcon, control}: InputProps<any>) {
+  const {field: { value, onChange, onBlur }, fieldState: { invalid, error }} = useController({ control, name });
+  
   return (
     <fieldset className={`input-container-${name} w-full`}>
       {label && (

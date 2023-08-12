@@ -1,43 +1,54 @@
 "use client";
 import classNames from "classnames";
-import { HTMLInputTypeAttribute } from "react";
-import { FieldValues, UseControllerProps } from "react-hook-form";
+import { ElementType, HTMLInputTypeAttribute } from "react";
+import {
+   FieldValues,
+   UseControllerProps,
+   useController,
+} from "react-hook-form";
 
 interface InputRootProps<T extends FieldValues = FieldValues>
-  extends UseControllerProps<T> {
-  type: HTMLInputTypeAttribute;
-  placeholder?: string;
-  label?: string;
-  customClassesNames?: string;
-  onClickIcon?: () => void;
-  prepend?: () => React.ReactNode;
-  append?: () => React.ReactNode;
+   extends UseControllerProps<T> {
+   label?: string;
+   isInvalid: boolean;
+   children: React.ReactNode;
 }
-export function InputRoot({
-  type,
-  label,
-  prepend,
-  append,
-  customClassesNames,
-}: InputRootProps) {
-  const inputClasses = classNames(
-    "flex",
-    "w-full",
-    "h-[46px]",
-    "border-b-[1px]",
-    "border-b-[#E6E6E6]",
-    "text-[#929DA7]",
-    customClassesNames
-  );
 
-  return (
-    <div className="w-full flex flex-col">
-      <label className="text-[16px] font-medium text-[#212B36]">{label}</label>
-      <div className={inputClasses}>
-        {prepend && <div className="flex items-center mx-2">{prepend()}</div>}
-        <input type={type} className="w-full focus:outline-none"/>
-        {append && append()}
-      </div>
-    </div>
-  );
+export function InputRoot({
+   label,
+   control,
+   name,
+   isInvalid,
+   children,
+}: InputRootProps) {
+   const {
+      field: { value, onChange, onBlur },
+      fieldState: { invalid, error },
+   } = useController({ control, name });
+
+   return (
+      <fieldset className="flex flex-col w-full">
+         <label
+            className="text-base font-medium text-[#212B36]"
+            htmlFor={`input-${name}`}
+         >
+            {label}
+         </label>
+         <div
+            className={`flex w-full border-b  pb-1 text-[#929DA7] mt-5 ${
+               isInvalid ? "border-[#EA4335]" : "border-[#E6E6E6]"
+            }`}
+         >
+            {children}
+         </div>
+         {invalid && (
+            <p
+               id={`input-error-${name}`}
+               className="text-[#EA4335] font-regular text-xs mt-1"
+            >
+               {error?.message}
+            </p>
+         )}
+      </fieldset>
+   );
 }
