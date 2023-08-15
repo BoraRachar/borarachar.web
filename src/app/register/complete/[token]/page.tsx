@@ -1,9 +1,9 @@
-import BasicRegisterForm from "@/components/BasicRegisterForm";
+import CompleteRegisterForm from "@/components/CompleteRegisterForm";
 import MessageSlider from "@/components/MessageSlider";
 import Image from "next/image";
 
 export const metadata = {
-   title: "Bora Rachar | Página de Cadastro",
+   title: "Bora Rachar | Termine seu cadastro",
    description: "...",
 };
 
@@ -42,7 +42,7 @@ export default function Register() {
             <div className="absolute bottom-0 w-full h-1 bg-secondary lg:top-0 lg:left-0 lg:h-full lg:w-1"></div>
          </figure>
          <section className="mx-4 sm:w-[80%] sm:mx-auto sm:pb-10 md:flex md:items-center md:justify-center md:min-w-[full] md:pb-0 md:flex-1">
-            <BasicRegisterForm />
+            <CompleteRegisterForm />
          </section>
       </section>
    );
