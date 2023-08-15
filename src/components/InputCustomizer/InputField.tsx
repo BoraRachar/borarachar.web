@@ -1,4 +1,4 @@
-import { ElementType, HTMLInputTypeAttribute } from "react";
+import { HTMLInputTypeAttribute } from "react";
 import {
    FieldValues,
    UseControllerProps,
@@ -11,10 +11,6 @@ interface InputRootProps<T extends FieldValues = FieldValues>
    type: HTMLInputTypeAttribute;
    placeholder?: string;
    label?: string;
-   customClassesNames?: string;
-   onClickIcon?: () => void;
-   prepend?: ElementType;
-   append?: ElementType;
    mask?: any;
 }
 
@@ -29,14 +25,22 @@ export function InputField({
       field: { value, onChange, onBlur },
       fieldState: { invalid, error },
    } = useController({ control, name });
-   
+
+   const handleChange = (event: any) => {
+      console.log(event.target.value);
+      onChange(event.target.value);
+   };
+
    if (mask)
       return (
          <InputMask
             mask={mask}
-            onChange={onChange}
+            maskChar={""}
+            id={`input-${name}`}
+            placeholder={placeholder}
+            onChange={handleChange}
             onBlur={onBlur}
-            value={value}
+            type={type}
             className="w-full font-normal focus:outline-none"
          />
       );
@@ -45,7 +49,7 @@ export function InputField({
       <input
          id={`input-${name}`}
          placeholder={placeholder}
-         onChange={onChange}
+         onChange={handleChange}
          onBlur={onBlur}
          type={type}
          className="w-full font-normal focus:outline-none"

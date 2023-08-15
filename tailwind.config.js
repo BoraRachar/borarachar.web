@@ -23,7 +23,7 @@ module.exports = {
          },
          boxShadow: {
             "card-custom": "17px 18px 0px 3px rgba(165,134,255,1)",
-            "card-custom-sm": "17px 4px 0px 3px rgba(165,134,255,1)",
+            "card-custom-sm": "8px 8px 0px 3px rgba(165,134,255,1)",
          },
          keyframes: {
             "fade-in-ltr": {

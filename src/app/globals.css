@@ -1,3 +1,19 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.clip-path-to-ltr {
+   clip-path: polygon(0 0, 100% 0, 100% 8%, 0 0);
+}
+
+.clip-path-to-rtl {
+   clip-path: polygon(0 0, 100% 0, 100% 0, 0 8%);
+}
+
+.clip-path-to-ttb {
+   clip-path: polygon(92% 0, 100% 0, 100% 100%, 100% 100%);
+}
+
+.clip-path-to-btt {
+   clip-path: polygon(100% 0, 100% 0, 100% 100%, 92% 100%);
+}

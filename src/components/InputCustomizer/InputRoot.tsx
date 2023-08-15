@@ -10,7 +10,6 @@ import {
 interface InputRootProps<T extends FieldValues = FieldValues>
    extends UseControllerProps<T> {
    label?: string;
-   isInvalid: boolean;
    children: React.ReactNode;
 }
 
@@ -18,12 +17,11 @@ export function InputRoot({
    label,
    control,
    name,
-   isInvalid,
    children,
 }: InputRootProps) {
    const {
       field: { value, onChange, onBlur },
-      fieldState: { invalid, error },
+      fieldState: { invalid, error, isTouched },
    } = useController({ control, name });
 
    return (
@@ -36,7 +34,11 @@ export function InputRoot({
          </label>
          <div
             className={`flex w-full border-b  pb-1 text-[#929DA7] mt-5 ${
-               isInvalid ? "border-[#EA4335]" : "border-[#E6E6E6]"
+               isTouched
+                  ? invalid
+                     ? "border-[#EA4335]"
+                     : "border-[#34A853]"
+                  : "border-[#929DA7]"
             }`}
          >
             {children}

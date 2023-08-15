@@ -1,6 +1,6 @@
 interface ButtonTitleProps {
   title: string;
-  customClassesNames: string;
+  customClassesNames?: string;
 }
 export function ButtonTitle({ title, customClassesNames }: ButtonTitleProps) {
   return (
