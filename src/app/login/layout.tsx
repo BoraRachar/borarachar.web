@@ -6,7 +6,7 @@ export default function LoginLayout({
 }) {
   return (
     <html lang="pt-br">
-      <body className="bg-neutral-gray-200 lg:flex lg:flex-row lg:items-center lg:justify-center">
+      <body className="bg-white lg:flex lg:flex-row lg:items-center lg:justify-center">
         <div className="flex items-center justify-center">
           {children}
         </div>

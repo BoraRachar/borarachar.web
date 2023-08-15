@@ -52,7 +52,7 @@ export default function LoginForm() {
 
    return (
       <section
-         className="flex flex-col bg-neutral-gray-200 items-center justify-center py-8 
+         className="flex flex-col items-center justify-center py-8 
     sm:bg-white sm:m-8 sm:rounded-lg sm:border 
     sm:border-[#DBDBDC] sm:justify-start sm:items-start sm:w-full sm:pb-16
     "
