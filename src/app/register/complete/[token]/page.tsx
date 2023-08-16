@@ -7,7 +7,7 @@ export const metadata = {
    description: "...",
 };
 
-export default function Register() {
+export default function Register({ params }: { params: { token: string } }) {
    return (
       <section className="flex flex-col lg:flex-row-reverse lg:items-center lg:max-h-screen lg:overflow-y-hidden">
          <figure className="w-full h-[475px] bg-[#FFFFFF] hidden overflow-hidden lg:overflow-visible md:flex md:items-center md:justify-center relative lg:h-[100vh] lg:flex-1">
@@ -42,7 +42,7 @@ export default function Register() {
             <div className="absolute bottom-0 w-full h-1 bg-secondary lg:top-0 lg:left-0 lg:h-full lg:w-1"></div>
          </figure>
          <section className="mx-4 sm:w-[80%] sm:mx-auto sm:pb-10 md:flex md:items-center md:justify-center md:min-w-[full] md:pb-0 md:flex-1">
-            <CompleteRegisterForm />
+            <CompleteRegisterForm token={params.token} />
          </section>
       </section>
    );
