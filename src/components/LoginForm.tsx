@@ -47,7 +47,6 @@ export default function LoginForm() {
    });
 
    const onSubmit = (data: AuthFormFields) => {
-      console.log(data);
    };
 
    return (

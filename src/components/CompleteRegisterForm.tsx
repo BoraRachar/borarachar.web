@@ -2,13 +2,17 @@
 import * as yup from "yup";
 
 import { FieldValues, useForm } from "react-hook-form";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { yupResolver } from "@hookform/resolvers/yup";
 import SectionTitle from "./SectionTitle/SectionTitle";
 import { InputCustomizer } from "./InputCustomizer";
 import { User } from "phosphor-react";
 import Image from "next/image";
 import Checkbox from "./Form/Checkbox";
+import { axiosClient } from "@/utils/axios";
+import { AxiosError } from "axios";
+import { useRouter } from "next/navigation";
+import { validarCPF } from "@/utils/cpfValidation";
 
 interface CompleteRegisterFormFields extends FieldValues {
    nome: string;
@@ -22,9 +26,25 @@ const completeRegisterFormSchema = yup.object().shape({
    cpf: yup.string().required("O CPF é obrigatório"),
 });
 
-const CompleteRegisterForm = () => {
+const CompleteRegisterForm = ({ token }: { token: string }) => {
    const [hasErrorMessage, setHasErrorMessage] = useState<string | null>(null);
    const [isChecked, setIsChecked] = useState<boolean>(false);
+   const [currentUserId, setCurrentUserId] = useState<string | null>(null);
+
+   const router = useRouter();
+
+   const getUserIdByToken = async () => {
+      try {
+         const { data, status } = await axiosClient.get(`api/token/${token}`);
+         if (status === 200) {
+            setCurrentUserId(data.userId);
+         }
+      } catch (err) {
+         const error = err as AxiosError;
+         // @ts-ignore
+         setHasErrorMessage(error.response?.data!.message);
+      }
+   };
 
    const {
       control,
@@ -44,12 +64,32 @@ const CompleteRegisterForm = () => {
 
    const onSubmit = async (formValues: CompleteRegisterFormFields) => {
       if (isChecked) {
-         formValues.termo = true;
-         console.log(formValues);
+         if (validarCPF(formValues.cpf)) {
+            formValues.termo = true;
+            try {
+               const { data, status } = await axiosClient.put(
+                  "api/auth/register",
+                  { ...formValues, userId: currentUserId }
+               );
+               if (status === 201) {
+                  router.push("/register/successfully");
+               }
+            } catch (err) {
+               const error = err as AxiosError;
+               // @ts-ignore
+               setHasErrorMessage(error.response?.data!.message);
+            }
+         } else {
+            setHasErrorMessage("CPF inválido");
+         }
       } else {
          setHasErrorMessage("Você precisa aceitar os termos para continuar");
       }
    };
+
+   useEffect(() => {
+      getUserIdByToken();
+   }, [token]);
 
    return (
       <section className="flex flex-col items-center justify-center gap-8 py-10 md:items-start md:min-w-[500px] md:max-w-[500px]">

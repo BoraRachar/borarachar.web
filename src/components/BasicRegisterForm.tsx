@@ -69,23 +69,18 @@ const BasicRegisterForm = () => {
    });
 
    const onSubmit = async (formValues: BasicRegisterFormFields) => {
-      console.log(formValues);
       try {
          const { data, status } = await axiosClient.post(
             "api/auth/register",
             formValues
          );
          if (status === 201) {
-            console.log("Chegou no success");
-            console.log(data);
             router.push(`/register/confirm-email`);
          }
       } catch (err) {
-         console.log("Chegou no error");
          const error = err as AxiosError;
          // @ts-ignore
          setHasErrorMessage(error.response?.data!.message);
-         console.log("Error: ", error.response?.data);
       }
    };
 

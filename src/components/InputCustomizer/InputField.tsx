@@ -27,7 +27,6 @@ export function InputField({
    } = useController({ control, name });
 
    const handleChange = (event: any) => {
-      console.log(event.target.value);
       onChange(event.target.value);
    };
 
