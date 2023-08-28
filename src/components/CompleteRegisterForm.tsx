@@ -67,11 +67,21 @@ const CompleteRegisterForm = ({ token }: { token: string }) => {
          if (validarCPF(formValues.cpf)) {
             formValues.termo = true;
             try {
-               const { data, status } = await axiosClient.put(
-                  "api/auth/register",
-                  { ...formValues, userId: currentUserId }
-               );
-               if (status === 201) {
+               // const { data, status } = await axiosClient.put(
+               //    "api/auth/register",
+               //    { ...formValues, userId: currentUserId }
+               // );
+               const response = await fetch("/api/auth/register", {
+                  body: JSON.stringify({
+                     ...formValues,
+                     userId: currentUserId,
+                  }),
+                  method: "PUT",
+                  headers: {
+                     "Content-Type": "application/json",
+                  },
+               });
+               if (response.status === 201) {
                   router.push("/register/successfully");
                }
             } catch (err) {
