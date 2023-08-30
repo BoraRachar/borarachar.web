@@ -6,17 +6,10 @@ import { useState } from "react";
 import { yupResolver } from "@hookform/resolvers/yup";
 import SectionTitle from "./SectionTitle/SectionTitle";
 import { InputCustomizer } from "./InputCustomizer";
-import {
-   EnvelopeSimple,
-   Eye,
-   EyeSlash,
-   GoogleLogo,
-   LockSimple,
-} from "phosphor-react";
+import { EnvelopeSimple, Eye, EyeSlash, LockSimple } from "phosphor-react";
 import { ButtonCustomizer } from "./ButtonCustomizer";
 import Link from "next/link";
 import Image from "next/image";
-import { axiosClient } from "@/utils/axios";
 import { AxiosError } from "axios";
 import { useRouter } from "next/navigation";
 
@@ -70,12 +63,19 @@ const BasicRegisterForm = () => {
 
    const onSubmit = async (formValues: BasicRegisterFormFields) => {
       try {
-         const { data, status } = await axiosClient.post(
-            "api/auth/register",
-            formValues
-         );
+         const response = await fetch("/api/auth/register", {
+            body: JSON.stringify(formValues),
+            method: "POST",
+            headers: {
+               "Content-Type": "application/json",
+            },
+         });
+         const { status } = response;
+         const data = await response.json();
+         console.log(data);
          if (status === 201) {
             router.push(`/register/confirm-email`);
+            console.log("OK");
          }
       } catch (err) {
          const error = err as AxiosError;
