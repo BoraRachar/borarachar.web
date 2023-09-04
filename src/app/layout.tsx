@@ -5,6 +5,8 @@ import "./globals.css";
 import { Provider } from "react-redux";
 import { store } from "@/store";
 
+// Branch cridada para que possa ser realizado os testes da branch: feature/button-component-parameterization
+
 const roboto = Roboto({ 
    weight: ["400", "500", "700"],
    subsets: ["latin"], 
