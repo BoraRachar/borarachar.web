@@ -5,7 +5,6 @@ import SectionTitle from "./SectionTitle/SectionTitle";
 import { FieldValues, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
-import Input from "@/components/Form/Input";
 import Checkbox from "./Form/Checkbox";
 import { useSelector, useDispatch } from "react-redux";
 import { ButtonCustomizer } from "./ButtonCustomizer";
@@ -18,6 +17,7 @@ import {
    EyeClosed,
    EyeSlash,
    LockSimple,
+   User,
 } from "phosphor-react";
 import { useState } from "react";
 
@@ -39,7 +39,7 @@ export default function LoginForm() {
    const {
       control,
       handleSubmit,
-      formState: { errors },
+      formState: { errors},
    } = useForm<AuthFormFields>({
       defaultValues: { email: "", password: "" },
       mode: "onBlur",
@@ -50,161 +50,115 @@ export default function LoginForm() {
    };
 
    return (
-      <section
-         className="flex flex-col bg-neutral-gray-200 items-center justify-center py-8 
-    sm:bg-white sm:m-8 sm:rounded-lg sm:border 
-    sm:border-[#DBDBDC] sm:justify-start sm:items-start sm:w-full sm:pb-16
-    "
-      >
-         <div className="hidden sm:block sm:ml-6">
-            <Link id="link back page" href="/">
-               <Image
-                  src="/assets/arrow-back.svg"
-                  alt="Botão de voltar"
-                  width={24}
-                  height={24}
-               />
-            </Link>
-         </div>
-         <div className="flex items-center justify-center w-full mt-4 mb-4">
-            <Image
-               id="logo-form"
-               src="/assets/logo.svg"
-               alt="Logo do Bora Rachar"
-               width={240}
-               height={88}
-            />
-         </div>
-         <div className="w-full px-8 mb-4 sm:mb-6">
-            <SectionTitle
-               title="Seja bem-vindo!"
-               customClassesNames={{
-                  header: "gap-0",
-                  title: "text-[32px] font-bold",
-               }}
-            />
-            <p className="text-sm text-neutral-black -mt-2 max-w-[40ch] sm:max-w-none sm:text-base">
-               Obtenha assinaturas com descontos incríveis! Não possui uma
-               conta?
-               <Link href="/" className="ml-1 text-secondary">
-                  Cadastra-se
-               </Link>
-            </p>
-         </div>
-         <form
-            onSubmit={handleSubmit(onSubmit)}
-            className="flex flex-col gap-2 w-full px-8 sm:max-w-[80%] 
-      sm:justify-center sm:items-center sm:mx-auto"
+     <section className="flex flex-col items-center justify-center gap-8 py-10 md:items-start md:min-w-[500px] md:max-w-[500px]">
+       <figure className="flex items-center justify-center w-full md:justify-start">
+         <Image
+           src="/assets/bora-rachar-logo.svg"
+           alt="Imagem da logomarca do Bora Rachar"
+           width={280}
+           height={100}
+           className="md:w-[100px] md:h-[40px]"
+         />
+       </figure>
+       <SectionTitle
+         title="Login"
+         customClassesNames={{
+           title:
+             "text-[24px] text-center font-black sm:text-[32px] md:text-left",
+           header: "-mt-6 sm:mt-0",
+         }}
+       />
+       <form
+         onSubmit={handleSubmit(onSubmit)}
+         className="flex flex-col w-full gap-6"
+       >
+         {/* Email input */}
+         <InputCustomizer.Root
+           label="Email"
+           //    @ts-ignore
+           control={control}
+           name="email"
          >
-            {/* Email input */}
-            <InputCustomizer.Root
-               label="Email"
-               // @ts-ignore
-               control={control}
-               name="email"
-            >
-               <InputCustomizer.Icon
-                  icon={EnvelopeSimple}
-                  isInvalid={errors.email ? true : false}
-               />
-               <InputCustomizer.Field
-                  name="email"
-                  type="text"
-                  // @ts-ignore
-                  control={control}
-               />
-            </InputCustomizer.Root>
-            {/* Password input */}
-            <InputCustomizer.Root
-               label="Senha"
-               // @ts-ignore
-               control={control}
-               name="password"
-            >
-               <InputCustomizer.Icon
-                  icon={LockSimple}
-                  isInvalid={errors.password ? true : false}
-               />
-               <InputCustomizer.Field
-                  name="password"
-                  type={isShowingPassword ? "text" : "password"}
-                  // @ts-ignore
-                  control={control}
-               />
-               <InputCustomizer.Icon
-                  icon={isShowingPassword ? Eye : EyeSlash}
-                  onClick={() => setIsShowingPassword(!isShowingPassword)}
-               />
-            </InputCustomizer.Root>
-            <div className="flex flex-col gap-2 mt-2 sm:flex-row sm:justify-between sm:w-full sm:hidden lg:flex">
-               <Checkbox
-                  title="Manter-me conectado"
-                  currentState={rememberUser}
-                  onClickFunction={() => {
-                     dispatch(setRememberUser(!rememberUser));
-                  }}
-               />
-               <Link href="#">Esqueci minha senha</Link>
-            </div>
-            <ButtonCustomizer.Root
-               type="primary"
-               customClassesNames="h-10 my-4 sm:my-6 lg:my-1 lg:mb-3"
-            >
-               <ButtonCustomizer.Title
-                  title="Acessar minha conta"
-                  customClassesNames="w-full text-neutral-gray-200"
-               />
-            </ButtonCustomizer.Root>
-         </form>
-         <div className="w-full px-8">
-            <div className="flex items-center w-full gap-4 sm:my-4">
-               <div className="flex-1 h-[1px] bg-[#dbdbdc]"></div>
-               <p className="text-base text-neutral-black">ou</p>
-               <div className="flex-1 h-[1px] bg-[#dbdbdc]"></div>
-            </div>
-            <div className="sm:max-w-[80%] mx-auto">
-               <ButtonCustomizer.Root
-                  type="secondary"
-                  customClassesNames="h-10 mt-4 mb-2 border-neutral-gray-300 sm:mt-8 sm:mb-4"
-                  iconPosition="left"
-               >
-                  <ButtonCustomizer.Icon
-                     icon={() => (
-                        <Image
-                           src="/assets/google-icon.svg"
-                           alt="Google"
-                           width={24}
-                           height={24}
-                        />
-                     )}
-                  />
-                  <ButtonCustomizer.Title
-                     title="Acessar com Google"
-                     customClassesNames="text-neutral-gray-300"
-                  />
-               </ButtonCustomizer.Root>
-               <ButtonCustomizer.Root
-                  type="secondary"
-                  customClassesNames="h-10 border border-neutral-gray-300"
-                  iconPosition="left"
-               >
-                  <ButtonCustomizer.Icon
-                     icon={() => (
-                        <Image
-                           src="/assets/instagram.svg"
-                           alt="Google"
-                           width={24}
-                           height={24}
-                        />
-                     )}
-                  />
-                  <ButtonCustomizer.Title
-                     title="Acessar com Instagram"
-                     customClassesNames="text-neutral-gray-300"
-                  />
-               </ButtonCustomizer.Root>
-            </div>
-         </div>
-      </section>
+           <InputCustomizer.Icon
+             icon={EnvelopeSimple}
+             isInvalid={errors.email ? true : false}
+           />
+           <InputCustomizer.Field
+             name="email"
+             type="email"
+             //   @ts-ignore
+             control={control}
+           />
+         </InputCustomizer.Root>
+         {/* Password input */}
+         <InputCustomizer.Root
+           label="Senha"
+           // @ts-ignore
+           control={control}
+           name="password"
+         >
+           <InputCustomizer.Icon
+             icon={LockSimple}
+             isInvalid={errors.password ? true : false}
+           />
+           <InputCustomizer.Field
+             name="password"
+             type={isShowingPassword ? "text" : "password"}
+             // @ts-ignore
+             control={control}
+           />
+           <InputCustomizer.Icon
+             icon={isShowingPassword ? Eye : EyeSlash}
+             onClick={() => setIsShowingPassword(!isShowingPassword)}
+           />
+         </InputCustomizer.Root>
+       </form>
+       <section className="flex justify-between w-full mt-2 sm:-mt-2 gap-9 sm:gap-6">
+        <Checkbox
+          title="Mantenha-me conectado"
+          currentState={rememberUser}
+          onClickFunction={() => dispatch(setRememberUser(!rememberUser))}
+        />
+        <Link href={"/register"}>
+          <p className="font-medium text-[#724FD8]">
+            Esqueceu sua senha?
+          </p>
+        </Link>
+       </section>
+       <input 
+          type="submit"
+          value="Acessar minha conta"
+          className="text-lg font-medium w-full text-white bg-[#724FD8] py-[10px] rounded-md cursor-pointer mt-6"
+        />
+        <section className="flex flex-col w-full mt-2 sm:-mt-2 gap-9 sm:gap-6">
+         <p className="font-normal text-[#637381] text-center">
+            Não possui uma conta ainda? Crie sua conta{" "}
+            <Link href={"/register"} className="font-medium text-[#724FD8]">
+              aqui
+            </Link>
+         </p>
+         <div className="flex items-center w-full gap-4 sm:my-4">
+          <div className="flex-1 h-[1px] bg-[#E7E7E7]"></div>
+          <p className="text-base text-neutral-black">ou</p>
+          <div className="flex-1 h-[1px] bg-[#E7E7E7]"></div>
+        </div>
+        <ButtonCustomizer.Root type="secondary" iconPosition="left">
+          <ButtonCustomizer.Icon
+            icon={() => (
+              <Image
+                alt="Ícone da logomarca do Google"
+                src={"/assets/google-icon.svg"}
+                width={24}
+                height={24}
+              />
+            )}
+          />
+          <ButtonCustomizer.Title
+            title="Criar conta com Google"
+            customClassesNames="font-medium text-[18px] text-[#4D4A4F]"
+          />
+        </ButtonCustomizer.Root>
+        </section>
+     </section>
    );
 }

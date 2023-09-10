@@ -24,7 +24,7 @@ export function InputIcon({
             width={24}
             height={24}
             color="#34A853"
-            className="mx-1"
+            className="mx-1 cursor-pointer"
             onClick={handleClick}
          />
       );
@@ -33,7 +33,7 @@ export function InputIcon({
          width={24}
          height={24}
          color={isInvalid ? "#EA4335" : "#979797"}
-         className="mx-1"
+         className="mx-1 cursor-pointer"
          onClick={handleClick}
       />
    );

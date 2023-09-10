@@ -19,7 +19,7 @@ export default function Checkbox({
    return (
       <fieldset className="flex flex-row items-center gap-2">
          <div
-            className="w-4 h-4 border border-[#B3B3B3] rounded-sm relative flex items-center justify-center"
+            className="w-4 h-4 border border-[#B3B3B3] rounded-sm relative flex items-center justify-center cursor-pointer"
             id={`checkbox-input-wrapper-${title}`}
             data-testid={`checkbox-input-wrapper-${title}`}
             onClick={() => handleCheckboxClick()}
