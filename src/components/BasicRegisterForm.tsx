@@ -12,6 +12,8 @@ import Link from "next/link";
 import Image from "next/image";
 import { AxiosError } from "axios";
 import { useRouter } from "next/navigation";
+import { setEmail } from "@/features/AuthSlice";
+import { useDispatch } from "react-redux";
 
 interface BasicRegisterFormFields extends FieldValues {
   email: string;
@@ -46,6 +48,7 @@ const BasicRegisterForm = () => {
     });
   const [hasErrorMessage, setHasErrorMessage] = useState<string | null>(null);
   const router = useRouter();
+  const dispatch = useDispatch();
 
   const {
     control,
@@ -72,10 +75,9 @@ const BasicRegisterForm = () => {
       });
       const { status } = response;
       const data = await response.json();
-      console.log(data);
+      dispatch(setEmail(data.email));
       if (status === 201) {
         router.push(`/register/confirm-email`);
-        console.log("OK");
       }
     } catch (err) {
       const error = err as AxiosError;

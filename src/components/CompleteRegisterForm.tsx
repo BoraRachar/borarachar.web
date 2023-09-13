@@ -9,7 +9,6 @@ import { InputCustomizer } from "./InputCustomizer";
 import { User } from "phosphor-react";
 import Image from "next/image";
 import Checkbox from "./Form/Checkbox";
-import { axiosClient } from "@/utils/axios";
 import { AxiosError } from "axios";
 import { useRouter } from "next/navigation";
 import { validarCPF } from "@/utils/cpfValidation";
@@ -35,8 +34,10 @@ const CompleteRegisterForm = ({ token }: { token: string }) => {
 
   const getUserIdByToken = async () => {
     try {
-      const { data, status } = await axiosClient.get(`api/token/${token}`);
-      if (status === 200) {
+      const response = await fetch(`/api/token/${token}`);
+      const data = await response.json();
+
+      if (response.status === 200) {
         setCurrentUserId(data.userId);
       }
     } catch (err) {
@@ -65,24 +66,24 @@ const CompleteRegisterForm = ({ token }: { token: string }) => {
   const onSubmit = async (formValues: CompleteRegisterFormFields) => {
     if (isChecked) {
       if (validarCPF(formValues.cpf)) {
-        formValues.termo = true;
+        formValues.termos = true;
         try {
           // const { data, status } = await axiosClient.put(
           //    "api/auth/register",
           //    { ...formValues, userId: currentUserId }
           // );
-          const response = await fetch("/api/auth/register", {
+          const response = await fetch(`/api/auth/register/${currentUserId}`, {
             body: JSON.stringify({
               ...formValues,
-              userId: currentUserId,
             }),
             method: "PUT",
             headers: {
               "Content-Type": "application/json",
             },
           });
-          if (response.status === 201) {
+          if (response.status === 200) {
             router.push("/register/successfully");
+            localStorage.removeItem("userEmail");
           }
         } catch (err) {
           const error = err as AxiosError;
