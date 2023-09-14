@@ -68,10 +68,6 @@ const CompleteRegisterForm = ({ token }: { token: string }) => {
       if (validarCPF(formValues.cpf)) {
         formValues.termos = true;
         try {
-          // const { data, status } = await axiosClient.put(
-          //    "api/auth/register",
-          //    { ...formValues, userId: currentUserId }
-          // );
           const response = await fetch(`/api/auth/register/${currentUserId}`, {
             body: JSON.stringify({
               ...formValues,
@@ -81,14 +77,21 @@ const CompleteRegisterForm = ({ token }: { token: string }) => {
               "Content-Type": "application/json",
             },
           });
-          if (response.status === 200) {
+
+          if (response.ok) {
             router.push("/register/successfully");
             localStorage.removeItem("userEmail");
+            localStorage.removeItem("url");
+          } else {
+            const errorResponse = await response.json();
+            console.error(errorResponse);
+            setHasErrorMessage(
+              "Ocorreu um erro na requisição: " + errorResponse.message
+            );
           }
         } catch (err) {
-          const error = err as AxiosError;
-          // @ts-ignore
-          setHasErrorMessage(error.response?.data!.message);
+          console.error(err);
+          setHasErrorMessage("Ocorreu um erro na requisição");
         }
       } else {
         setHasErrorMessage("CPF inválido");

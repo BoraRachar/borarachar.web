@@ -1,9 +1,8 @@
 "use client";
 import SectionTitle from "@/components/SectionTitle/SectionTitle";
-import { RootState } from "@/store";
+
 import { AxiosError } from "axios";
 import Image from "next/image";
-import { useSelector } from "react-redux";
 
 export const metadata = {
   title: "Bora Rachar | Confirme seu e-mail",
@@ -12,6 +11,7 @@ export const metadata = {
 
 export default function Register() {
   const email = localStorage.getItem("userEmail");
+  const url = localStorage.getItem("url");
 
   const resendEmail = async () => {
     try {
@@ -70,6 +70,8 @@ export default function Register() {
           >
             Enviar novo e-mail
           </button>
+
+          <p className="text-md text-[#2349f7] mt-4"> {url}</p>
         </div>
       </section>
     </section>

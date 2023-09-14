@@ -10,7 +10,10 @@ export async function POST(request: NextRequest) {
       password,
       confirmPassword,
     });
-    return NextResponse.json({ message: data.message, email }, { status });
+    return NextResponse.json(
+      { message: data.message, url: data.url },
+      { status }
+    );
   } catch (err) {
     const error = err as AxiosError;
     return NextResponse.json(
