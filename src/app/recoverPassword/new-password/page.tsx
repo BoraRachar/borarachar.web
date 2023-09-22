@@ -6,7 +6,7 @@ export const metadata = {
   description: "...",
 };
 
-export default function ResetPassword() {
+export default function RecoverPassword() {
   return (
     <section className=" flex lg:flex-row lg:flex-row-reverse justify-center items-center lg:overflow-y-hidden min-h-screen md:flex-col ">
       <figure className=" hidden overflow-hidden lg:overflow-visible md:flex md:items-center md:justify-center  lg:flex-1 ">
