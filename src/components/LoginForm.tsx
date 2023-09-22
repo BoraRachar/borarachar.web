@@ -36,6 +36,7 @@ const authFormSchema = yup.object().shape({
 
 export default function LoginForm() {
   const [isShowingPassword, setIsShowingPassword] = useState(false);
+  const [hasErrorMessage, setHasErrorMessage] = useState<string | null>(null);
   const dispatch = useDispatch();
   const { rememberUser } = useSelector((state: RootState) => state.auth);
   const router = useRouter();
@@ -60,16 +61,18 @@ export default function LoginForm() {
           "Content-Type": "application/json",
         },
       });
-      const { status } = response;
       const data = await response.json();
 
-      if (status === 200) {
+      if (response.ok) {
         const { token: { accessToken, refreshToken } } = data;
-        
+
         set("accessToken", accessToken);
         set("refreshToken", refreshToken);
         
         router.push("/");
+      } else {
+        const { data: { message } } = data;
+        setHasErrorMessage(message);
       }
     } catch (err) {
       const error = err as AxiosError;
@@ -156,6 +159,9 @@ export default function LoginForm() {
           value="Acessar minha conta"
           className="text-lg font-medium w-full text-white bg-[#724FD8] py-[10px] rounded-md cursor-pointer mt-6"
         />
+        { hasErrorMessage && (
+          <p className="text-[#EA4335] font-regular text-xs mt-1">{hasErrorMessage}</p>
+        )}
       </form>
       <section className="flex flex-col w-full mt-2 sm:-mt-2 gap-9 sm:gap-6">
         <p className="font-normal text-[#637381] text-center">
@@ -169,7 +175,10 @@ export default function LoginForm() {
           <p className="text-base text-neutral-black">ou</p>
           <div className="flex-1 h-[1px] bg-[#E7E7E7]"></div>
         </div>
-        <ButtonCustomizer.Root type="secondary" iconPosition="left">
+        <ButtonCustomizer.Root 
+          type="secondary" 
+          iconPosition="left"
+        >
           <ButtonCustomizer.Icon
             icon={() => (
               <Image
