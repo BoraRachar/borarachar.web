@@ -4,23 +4,19 @@ import * as yup from "yup";
 import { FieldValues, useForm } from "react-hook-form";
 import { useState } from "react";
 import { yupResolver } from "@hookform/resolvers/yup";
-import SectionTitle from "./SectionTitle/SectionTitle";
-import { InputCustomizer } from "./InputCustomizer";
-import { EnvelopeSimple, Eye, EyeSlash, LockSimple } from "phosphor-react";
-import { ButtonCustomizer } from "./ButtonCustomizer";
-import Link from "next/link";
-import Image from "next/image";
-import { AxiosError } from "axios";
 import { useRouter } from "next/navigation";
+import Image from "next/image";
+import SectionTitle from "./SectionTitle/SectionTitle";
+import Link from "next/link";
+import { InputCustomizer } from "./InputCustomizer";
+import { Eye, EyeSlash, LockSimple } from "phosphor-react";
 
-interface BasicRegisterFormFields extends FieldValues {
-  email: string;
+interface NewPasswordFormFields extends FieldValues {
   password: string;
   confirmPassword: string;
 }
 
-const basicRegisterFormSchema = yup.object().shape({
-  email: yup.string().email("E-mail inválido").required("Campo Obrigatório"),
+const newPasswordFormSchema = yup.object().shape({
   password: yup
     .string()
     .required("Senha obrigatória")
@@ -38,7 +34,7 @@ interface ShowingFieldsValues {
   confirmPassword: boolean;
 }
 
-const BasicRegisterForm = () => {
+const NewPasswordForm = () => {
   const [isShowingFieldsValues, setIsShowingFieldsValues] =
     useState<ShowingFieldsValues>({
       password: false,
@@ -51,42 +47,18 @@ const BasicRegisterForm = () => {
     control,
     handleSubmit,
     formState: { errors, touchedFields },
-  } = useForm<BasicRegisterFormFields>({
+  } = useForm<NewPasswordFormFields>({
     defaultValues: {
-      email: "",
       password: "",
       confirmPassword: "",
     },
     mode: "onBlur",
-    resolver: yupResolver<BasicRegisterFormFields>(basicRegisterFormSchema),
+    resolver: yupResolver<NewPasswordFormFields>(newPasswordFormSchema),
   });
-
-  const onSubmit = async (formValues: BasicRegisterFormFields) => {
-    try {
-      const response = await fetch("/api/auth/register", {
-        body: JSON.stringify(formValues),
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
-      const { status } = response;
-      const data = await response.json();
-      console.log(data);
-      if (status === 201) {
-        router.push(`/register/confirm-email`);
-        console.log("OK");
-      }
-    } catch (err) {
-      const error = err as AxiosError;
-      // @ts-ignore
-      setHasErrorMessage(error.response?.data!.message);
-    }
-  };
 
   return (
     <section className="flex flex-col items-center justify-center gap-8 py-10 md:items-start md:min-w-[400px] md:max-w-[400px]">
-      <figure className="flex items-center justify-center w-full md:justify-start">
+      <figure>
         <Image
           src="/assets/bora-rachar-logo.svg"
           alt="Imagem da logomarca do Bora Rachar"
@@ -96,36 +68,16 @@ const BasicRegisterForm = () => {
         />
       </figure>
       <SectionTitle
-        title="Crie sua conta"
+        title="Redefinição de senha"
         customClassesNames={{
           title:
-            "text-[24px] text-center font-black sm:text-[32px] md:text-left",
+            " lg:ml-10 text-[24px] text-center font-black sm:text-[32px] md:text-left",
           header: "-mt-6 sm:mt-0",
         }}
       />
-      <form
-        onSubmit={handleSubmit(onSubmit)}
-        className="flex flex-col w-full gap-6"
-      >
+      <form className="flex flex-col w-full gap-6 lg:ml-10">
         {/* Email input */}
-        <InputCustomizer.Root
-          label="Email"
-          //    @ts-ignore
-          control={control}
-          name="email"
-        >
-          <InputCustomizer.Icon
-            icon={EnvelopeSimple}
-            isInvalid={errors.email ? true : false}
-            isTouched={touchedFields.email ? true : false}
-          />
-          <InputCustomizer.Field
-            name="email"
-            type="email"
-            //   @ts-ignore
-            control={control}
-          />
-        </InputCustomizer.Root>
+
         {/* Password input */}
         <InputCustomizer.Root
           label="Senha"
@@ -195,42 +147,12 @@ const BasicRegisterForm = () => {
         )}
         <input
           type="submit"
-          value="Criar minha conta"
+          value="Redefinir senha"
           className="text-lg font-medium w-full text-white bg-[#724FD8] py-[10px] rounded-md cursor-pointer mt-6"
         />
       </form>
-      <section className="flex flex-col w-full mt-2 sm:-mt-2 gap-9 sm:gap-6">
-        <p className="font-normal text-[#637381] text-center">
-          Já possui uma conta? Entre na sua conta{" "}
-          <Link href={"/login"} className="font-medium">
-            aqui
-          </Link>
-          .
-        </p>
-        <div className="flex items-center w-full gap-4 sm:my-4">
-          <div className="flex-1 h-[1px] bg-[#E7E7E7]"></div>
-          <p className="text-base text-neutral-black">ou</p>
-          <div className="flex-1 h-[1px] bg-[#E7E7E7]"></div>
-        </div>
-        <ButtonCustomizer.Root type="secondary" iconPosition="left">
-          <ButtonCustomizer.Icon
-            icon={() => (
-              <Image
-                alt="Ícone da logomarca do Google"
-                src={"/assets/google-icon.svg"}
-                width={24}
-                height={24}
-              />
-            )}
-          />
-          <ButtonCustomizer.Title
-            title="Criar conta com Google"
-            customClassesNames="font-medium text-[18px] text-[#4D4A4F]"
-          />
-        </ButtonCustomizer.Root>
-      </section>
     </section>
   );
 };
 
-export default BasicRegisterForm;
+export default NewPasswordForm;
