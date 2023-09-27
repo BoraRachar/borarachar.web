@@ -6,7 +6,11 @@ export const metadata = {
   description: "...",
 };
 
-export default function RecoverPassword() {
+export default function RecoverPassword({
+  params,
+}: {
+  params: { email: string };
+}) {
   return (
     <section className=" flex lg:flex-row lg:flex-row-reverse justify-center items-center lg:overflow-y-hidden min-h-screen md:flex-col ">
       <figure className=" hidden overflow-hidden lg:overflow-visible md:flex md:items-center md:justify-center  lg:flex-1 ">
@@ -21,7 +25,7 @@ export default function RecoverPassword() {
         </div>
       </figure>
       <section className="mx-4 sm:w-[80%] sm:mx-auto sm:pb-10 md:flex md:items-center md:justify-center md:min-w-[full] md:pb-0 md:flex-1">
-        <NewPasswordForm />
+        <NewPasswordForm email={params.email} />
       </section>
     </section>
   );

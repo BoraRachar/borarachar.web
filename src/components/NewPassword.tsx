@@ -35,7 +35,7 @@ interface ShowingFieldsValues {
   confirmPassword: boolean;
 }
 
-const NewPasswordForm = () => {
+const NewPasswordForm = ({ email }: { email: string }) => {
   const [isShowingFieldsValues, setIsShowingFieldsValues] =
     useState<ShowingFieldsValues>({
       password: false,
@@ -57,12 +57,24 @@ const NewPasswordForm = () => {
     resolver: yupResolver<NewPasswordFormFields>(newPasswordFormSchema),
   });
 
-  const onSubmit = async (formValues: NewPasswordFormFields) => {
-    try {
-      const teste = JSON.stringify(formValues);
-      console.log(teste);
+  const decodeEmail = decodeURIComponent(email);
 
-      router.push("/recoverPassword/password-reset-success");
+  const onSubmit = async (formValues: NewPasswordFormFields) => {
+    formValues.email = decodeEmail;
+    try {
+      const response = await fetch("/api/recoverPassword/newPassword", {
+        body: JSON.stringify(formValues),
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      const { status } = response;
+      const data = await response.json();
+      console.log(data);
+      if (status === 200) {
+        router.push("/recoverPassword/password-reset-success");
+      }
     } catch (err) {
       const error = err as AxiosError;
       // @ts-ignore
