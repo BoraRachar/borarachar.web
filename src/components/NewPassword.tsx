@@ -10,6 +10,7 @@ import SectionTitle from "./SectionTitle/SectionTitle";
 import Link from "next/link";
 import { InputCustomizer } from "./InputCustomizer";
 import { Eye, EyeSlash, LockSimple } from "phosphor-react";
+import { AxiosError } from "axios";
 
 interface NewPasswordFormFields extends FieldValues {
   password: string;
@@ -56,6 +57,19 @@ const NewPasswordForm = () => {
     resolver: yupResolver<NewPasswordFormFields>(newPasswordFormSchema),
   });
 
+  const onSubmit = async (formValues: NewPasswordFormFields) => {
+    try {
+      const teste = JSON.stringify(formValues);
+      console.log(teste);
+
+      router.push("/recoverPassword/password-reset-success");
+    } catch (err) {
+      const error = err as AxiosError;
+      // @ts-ignore
+      setHasErrorMessage(error.response?.data!.message);
+    }
+  };
+
   return (
     <section className="flex flex-col items-center justify-center gap-8 py-10 md:items-start md:min-w-[400px] md:max-w-[400px]">
       <figure>
@@ -75,9 +89,10 @@ const NewPasswordForm = () => {
           header: "-mt-6 sm:mt-0",
         }}
       />
-      <form className="flex flex-col w-full gap-6 lg:ml-10">
-        {/* Email input */}
-
+      <form
+        onSubmit={handleSubmit(onSubmit)}
+        className="flex flex-col w-full gap-6 lg:ml-10"
+      >
         {/* Password input */}
         <InputCustomizer.Root
           label="Senha"
