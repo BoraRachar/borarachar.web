@@ -10,6 +10,7 @@ import SectionTitle from "./SectionTitle/SectionTitle";
 import Link from "next/link";
 import { InputCustomizer } from "./InputCustomizer";
 import { Eye, EyeSlash, LockSimple } from "phosphor-react";
+import { AxiosError } from "axios";
 
 interface NewPasswordFormFields extends FieldValues {
   password: string;
@@ -34,7 +35,7 @@ interface ShowingFieldsValues {
   confirmPassword: boolean;
 }
 
-const NewPasswordForm = () => {
+const NewPasswordForm = ({ email }: { email: string }) => {
   const [isShowingFieldsValues, setIsShowingFieldsValues] =
     useState<ShowingFieldsValues>({
       password: false,
@@ -56,6 +57,31 @@ const NewPasswordForm = () => {
     resolver: yupResolver<NewPasswordFormFields>(newPasswordFormSchema),
   });
 
+  const decodeEmail = decodeURIComponent(email);
+
+  const onSubmit = async (formValues: NewPasswordFormFields) => {
+    formValues.email = decodeEmail;
+    try {
+      const response = await fetch("/api/recoverPassword/newPassword", {
+        body: JSON.stringify(formValues),
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      const { status } = response;
+      const data = await response.json();
+      console.log(data);
+      if (status === 200) {
+        router.push("/recoverPassword/password-reset-success");
+      }
+    } catch (err) {
+      const error = err as AxiosError;
+      // @ts-ignore
+      setHasErrorMessage(error.response?.data!.message);
+    }
+  };
+
   return (
     <section className="flex flex-col items-center justify-center gap-8 py-10 md:items-start md:min-w-[400px] md:max-w-[400px]">
       <figure>
@@ -75,9 +101,10 @@ const NewPasswordForm = () => {
           header: "-mt-6 sm:mt-0",
         }}
       />
-      <form className="flex flex-col w-full gap-6 lg:ml-10">
-        {/* Email input */}
-
+      <form
+        onSubmit={handleSubmit(onSubmit)}
+        className="flex flex-col w-full gap-6 lg:ml-10"
+      >
         {/* Password input */}
         <InputCustomizer.Root
           label="Senha"
