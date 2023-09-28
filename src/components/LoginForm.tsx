@@ -150,7 +150,7 @@ export default function LoginForm() {
             currentState={rememberUser}
             onClickFunction={() => dispatch(setRememberUser(!rememberUser))}
           />
-          <Link href={"/register"}>
+          <Link href={"/recoverPassword/forgot-password"}>
             <p className="font-medium text-[#724FD8]">Esqueceu sua senha?</p>
           </Link>
         </section>
