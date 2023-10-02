@@ -22,7 +22,7 @@ const newPasswordFormSchema = yup.object().shape({
     .string()
     .required("Senha obrigatória")
     .matches(
-      /(?=.*\d)(?=.*[A-Z])(?=.*[$*&@#])[0-9a-zA-Z$*&@#]{8,}/,
+      /(?=.*\d)(?=.*[A-Z])(?=.*[@¨$!#%^&*()_+|~=`{}\[\]:";'<>?,.\\/])[0-9a-zA-Z@¨$!#%^&*()_+|~=`{}\[\]:";'<>?,.\\/]{8,}/,
       "A senha deve possuir no mínimo 8 caracteres, contendo pelo menos 1 letra maiúscula, 1 número e um caractere especial (Ex.: #,$,*,@)"
     ),
   confirmPassword: yup
