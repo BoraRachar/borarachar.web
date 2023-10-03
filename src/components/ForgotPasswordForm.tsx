@@ -11,13 +11,23 @@ import Link from "next/link";
 import { InputCustomizer } from "./InputCustomizer";
 import { EnvelopeSimple } from "phosphor-react";
 import { AxiosError } from "axios";
+import checkEmailExists from "@/utils/checkEmail";
 
 interface ForgotPasswordFormFields extends FieldValues {
   email: string;
 }
 
 const forgotPasswordFormSchema = yup.object().shape({
-  email: yup.string().email("E-mail inválido").required("Campo Obrigatório"),
+  email: yup.string()
+    .email("E-mail inválido")
+    .required("Campo obrigatório")
+    .test("check-email-exists", "Email incorreto ou inexistente", async function (value) {
+      if (value) {
+        const emailExists = await checkEmailExists(value);
+        return emailExists;
+      }
+      return true;
+    }),
 });
 
 const ForgotPasswordForm = () => {
@@ -49,7 +59,8 @@ const ForgotPasswordForm = () => {
         setHasErrorMessage(null);
         router.push("/recoverPassword/forgot-password/success");
       } else {
-        setHasErrorMessage(data.message);
+        const { data: { message } } = data;
+        setHasErrorMessage(message);
       }
     } catch (err) {
       const error = err as AxiosError;
@@ -90,7 +101,7 @@ const ForgotPasswordForm = () => {
         >
           <InputCustomizer.Icon
             icon={EnvelopeSimple}
-            isInvalid={errors.email ? true : false}
+            isInvalid={ errors.email ? true : false }
           />
           <InputCustomizer.Field
             name="email"
