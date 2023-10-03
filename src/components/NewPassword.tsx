@@ -107,7 +107,7 @@ const NewPasswordForm = ({ email }: { email: string }) => {
       >
         {/* Password input */}
         <InputCustomizer.Root
-          label="Senha"
+          label="Nova Senha"
           //    @ts-ignore
           control={control}
           name="password"
