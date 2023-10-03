@@ -30,7 +30,7 @@ interface AuthFormFields extends FieldValues {
 }
 
 const authFormSchema = yup.object().shape({
-  email: yup.string().email("E-mail inválido").required("Campo Obrigatório"),
+  email: yup.string().email("E-mail inválido").required("Campo obrigatório"),
   password: yup.string().required("Senha obrigatória"),
 });
 
@@ -102,7 +102,7 @@ export default function LoginForm() {
       />
       <form
         onSubmit={handleSubmit(onSubmit)}
-        className="flex flex-col w-full gap-6"
+        className="flex flex-col w-full gap-6 overflow-auto"
       >
         {/* Email input */}
         <InputCustomizer.Root
@@ -159,9 +159,6 @@ export default function LoginForm() {
           value="Acessar minha conta"
           className="text-lg font-medium w-full text-white bg-[#724FD8] py-[10px] rounded-md cursor-pointer mt-6"
         />
-        { hasErrorMessage && (
-          <p className="text-[#EA4335] font-regular text-xs mt-1">{hasErrorMessage}</p>
-        )}
       </form>
       <section className="flex flex-col w-full mt-2 sm:-mt-2 gap-9 sm:gap-6">
         <p className="font-normal text-[#637381] text-center">
