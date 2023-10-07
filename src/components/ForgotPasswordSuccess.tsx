@@ -3,12 +3,40 @@ import Image from "next/image";
 import Link from "next/link";
 
 import { useRouter } from "next/navigation";
+import { useSelector } from "react-redux";
+import { getEmail } from "@/store/emailSlice";
 
 const ForgotPasswordSuccess = () => {
   const router = useRouter();
+  const email = useSelector(getEmail);
+  
+  console.log(email);
 
   const handleBackToHomePage = () => {
     router.push("/");
+  }
+
+  const handleResendEmail = async () => {
+    try {
+      if (email) {
+        const response = await fetch("/api/forgotPassword", {
+          body: JSON.stringify(email),
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        });
+
+        if (response.ok) {
+          console.log("Email reenviado com sucesso!");
+          console.log(email);
+        } else {
+          console.log("Erro ao reenviar email");
+        }
+      }
+    } catch (error){
+      console.error("Erro ao reenviar email", error);
+    }
   }
 
   return (
@@ -38,8 +66,9 @@ const ForgotPasswordSuccess = () => {
           />
         </figure>
         <p className="text-center md:text-xl  text-[#563BA2]  md:font-bold pb-16 sm:font-normal ">
-          Enviamos uma mensagem para o seu email cadastrado 
-          <br />com o link para redefinição de senha!
+          Enviamos uma mensagem para o seu email cadastrado
+          <br />
+          com o link para redefinição de senha!
         </p>
         <input
           type="submit"
@@ -49,11 +78,13 @@ const ForgotPasswordSuccess = () => {
         />
         <p className="font-normal mt-[24px] text-[#4D4A4F] text-center">
           Não recebeu o email?{" "}
-          <Link href={"/forgot-password"} className="font-medium text-[#F27405]">
+          <button
+            onClick={handleResendEmail}
+            className="font-medium text-[#F27405] cursor-pointer"
+          >
             Reenviar
-          </Link>
-          {" "}
-          email.  
+          </button>{" "}
+          email.
         </p>
       </div>
     </section>

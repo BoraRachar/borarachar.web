@@ -12,6 +12,8 @@ import { InputCustomizer } from "./InputCustomizer";
 import { EnvelopeSimple } from "phosphor-react";
 import { AxiosError } from "axios";
 import checkEmailExists from "@/utils/checkEmail";
+import { useDispatch } from "react-redux";
+import { setEmail } from "@/store/emailSlice";
 
 interface ForgotPasswordFormFields extends FieldValues {
   email: string;
@@ -31,6 +33,7 @@ const forgotPasswordFormSchema = yup.object().shape({
 });
 
 const ForgotPasswordForm = () => {
+  const dispatch = useDispatch();
   const [hasErrorMessage, setHasErrorMessage] = useState<string | null>(null);
   const router = useRouter();
 
@@ -57,6 +60,7 @@ const ForgotPasswordForm = () => {
       console.log(data);
       if (response.ok) {
         setHasErrorMessage(null);
+        dispatch(setEmail(formValues.email));
         router.push("/recoverPassword/forgot-password/success");
       } else {
         const { data: { message } } = data;
