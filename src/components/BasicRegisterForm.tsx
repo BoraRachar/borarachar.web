@@ -252,6 +252,22 @@ const BasicRegisterForm = () => {
             customClassesNames="font-medium text-[18px] text-[#4D4A4F]"
           />
         </ButtonCustomizer.Root>
+        <ButtonCustomizer.Root type="secondary" iconPosition="left">
+          <ButtonCustomizer.Icon
+            icon={() => (
+              <Image
+                alt="Ícone da logomarca do Google"
+                src={"/assets/instagram.svg"}
+                width={24}
+                height={24}
+              />
+            )}
+          />
+          <ButtonCustomizer.Title
+            title="Criar conta com Instagram"
+            customClassesNames="font-medium text-[18px] text-[#4D4A4F]"
+          />
+        </ButtonCustomizer.Root>
       </section>
     </section>
   );
