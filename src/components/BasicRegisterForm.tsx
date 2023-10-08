@@ -12,6 +12,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { AxiosError } from "axios";
 import { useRouter } from "next/navigation";
+import Checkbox from "./Form/Checkbox";
 
 interface BasicRegisterFormFields extends FieldValues {
   email: string;
@@ -45,6 +46,7 @@ const BasicRegisterForm = () => {
       confirmPassword: false,
     });
   const [hasErrorMessage, setHasErrorMessage] = useState<string | null>(null);
+  const [agreement, setAgreement] = useState<boolean>(false);
   const router = useRouter();
 
   const {
@@ -83,6 +85,11 @@ const BasicRegisterForm = () => {
       setHasErrorMessage(error.response?.data!.message);
     }
   };
+
+  const formValidated =
+    errors.password === undefined &&
+    errors.confirmPassword === undefined &&
+    errors.email === undefined;
 
   return (
     <section className="flex flex-col items-center justify-center gap-8 py-10 md:items-start md:min-w-[400px] md:max-w-[400px]">
@@ -188,6 +195,20 @@ const BasicRegisterForm = () => {
             }
           />
         </InputCustomizer.Root>
+        {formValidated && (
+          <Checkbox
+            title={
+              <>
+                <span>Concordo com os termos do Bora Rachar.</span>
+                <br />
+                <a href="#">Leia aqui</a>
+              </>
+            }
+            currentState={agreement}
+            onClickFunction={() => setAgreement(!agreement)}
+            color="bg-neutral-green !important"
+          />
+        )}
         {hasErrorMessage && (
           <p className="text-[#EA4335] font-regular text-xs mt-1">
             {hasErrorMessage}
@@ -196,7 +217,10 @@ const BasicRegisterForm = () => {
         <input
           type="submit"
           value="Criar minha conta"
-          className="text-lg font-medium w-full text-white bg-[#724FD8] py-[10px] rounded-md cursor-pointer mt-6"
+          className={`text-lg font-medium w-full text-white ${
+            agreement ? "bg-[#724FD8]" : "bg-gray-200"
+          } py-[10px] rounded-md cursor-pointer mt-6`}
+          disabled={agreement ? false : true}
         />
       </form>
       <section className="flex flex-col w-full mt-2 sm:-mt-2 gap-9 sm:gap-6">
