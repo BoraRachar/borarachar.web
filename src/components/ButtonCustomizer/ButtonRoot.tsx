@@ -19,8 +19,11 @@ export function ButtonRoot({
 }: ButtonRootProps) {
 
   const handleClickButton = (event: SyntheticEvent) => {
+    if (onClick) {
+      onClick();
     event.preventDefault();
-    if (onClick) onClick();
+      
+    }
  };
 
   const buttonBaseClass =

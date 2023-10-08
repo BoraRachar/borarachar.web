@@ -20,7 +20,7 @@ export default function Header() {
                         <div className="flex items-center justify-end w-2/4">
                             <Link href="/login" className="mr-8 text-base font-bold text-neutral-black" id="link-login">Login</Link>
                             <div className="w-[181px]">
-                                <Link href="#">
+                                <Link href="register">
                                     <ButtonCustomizer.Root type="primary" customClassesNames="flex items-center justify-center h-12">
                                         <ButtonCustomizer.Title title="Criar Conta" customClassesNames="font-semibold text-base text-neutral-white "/>
                                     </ButtonCustomizer.Root> 
