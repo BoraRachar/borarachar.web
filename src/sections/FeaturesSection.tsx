@@ -1,5 +1,4 @@
 import Card from "@/components/Card";
-import SectionTitle from "@/components/SectionTitle/SectionTitle";
 
 const featuresCardsList = [
    {
@@ -32,7 +31,6 @@ export default function FeaturesSection() {
    return (
       <div className="w-full bg-[#F9F7FF]" id="features-section-wrapper">
          <section className="flex flex-col items-center w-10/12 gap-16 py-8 mx-auto">
-            <SectionTitle title="Features" />
             <ol className="flex items-start gap-16 min-h-[750px] py-16">
                {featuresCardsList.map((card, index) => (
                   <Card

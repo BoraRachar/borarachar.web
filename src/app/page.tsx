@@ -6,6 +6,7 @@ import FAQSection from "@/sections/FAQSection";
 import Footer from "@/sections/FooterSection";
 import CTASection from "@/sections/CTASection";
 
+// Branch criada para a realização dos testes
 export const metadata = {
   title: "Bora Rachar | Página inicial",
   description: "...",
